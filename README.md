@@ -73,6 +73,15 @@ Results on the 200-video dev set:
 * **M2 does not gain.** It stays at zero-shot level; v2 − v1 is −0.002 [−0.018, +0.013].
 * **Preliminary.** RFT was run after the freeze and never on the test set, so these numbers are not comparable to the test table above.
 
+## Released models
+
+| Model | Base | Evaluation | License |
+|---|---|---|---|
+| [**Saltywan/t5gemma-2b-2b-ytseg-chaptering-lora**](https://huggingface.co/Saltywan/t5gemma-2b-2b-ytseg-chaptering-lora) | `google/t5gemma-2b-2b-ul2-it` | Test: exact F1 0.500 macro / 51.99 micro (best model) | Gemma Terms of Use |
+| [Saltywan/qwen3.5-9b-ytseg-chaptering-rft-lora](https://huggingface.co/Saltywan/qwen3.5-9b-ytseg-chaptering-rft-lora) | `Qwen/Qwen3.5-9B` | Dev only: exact F1 0.440 (RFT v2, experimental) | CC BY-NC-SA 4.0 |
+
+Both are LoRA adapters, loaded with PEFT on top of the base model. Each model card has usage code that uses this repository's prompt, windowing and parser.
+
 ## Start here
 
 | Notebook | Experiment |
@@ -115,7 +124,7 @@ Endpoint URLs in `configs/models.json` are placeholders (`${CHAPTERING_ENDPOINT_
 
 ## Not in this repository
 
-* **LoRA adapters (~540 MB for 8 adapters):** kept out of git; distributed separately as a GitHub Release asset or a Hugging Face model repository.
+* **LoRA adapter weights:** kept out of git. The best two are on Hugging Face (see [Released models](#released-models)).
 * **Full run outputs (~2.6 GB):** transcripts and windows, raw generations including thinking, and per-video metric details. Per-video scores can be recomputed from `results/**/predictions.jsonl` and the rebuilt records.
 
 ## Licenses and attribution
@@ -135,5 +144,5 @@ Endpoint URLs in `configs/models.json` are placeholders (`${CHAPTERING_ENDPOINT_
   | Gemma 4 12B | [Apache-2.0](https://ai.google.dev/gemma/docs/gemma_4_license) |
   | RoBERTa-large (used for BERTScore) | MIT |
 
-  LoRA adapters are derivatives of their base models. If the T5Gemma adapters are published, they must carry the Gemma Terms of Use and its use restrictions.
+  LoRA adapters are derivatives of their base models. The released T5Gemma adapter carries the Gemma Terms of Use and its use restrictions. The Qwen adapter is released under CC BY-NC-SA 4.0 because of its training data.
 * **Libraries:** used as installed dependencies, not vendored: PyTorch, Transformers, PEFT, vLLM, datasets, rouge-score, segeval and bert-score.
