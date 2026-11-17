@@ -1,0 +1,39 @@
+{
+  "alias": "M2",
+  "windows": "artifacts/windows/dev-v2/validation_windows.jsonl",
+  "adapter": "artifacts/rft-v1/M2-rft-lora/adapter",
+  "arms": [
+    "FT"
+  ],
+  "batch_size": 100,
+  "output": "artifacts/rft-v1/M2-dev",
+  "max_num_seqs": 100,
+  "max_new_tokens": 32768,
+  "seed": 393,
+  "purpose": "RFT dev-200 validation; not held-out test",
+  "model_revision": "43c9d014b231474fa7212dbb48a762566c2b255d",
+  "dtype": "bfloat16",
+  "lora_dtype": "bfloat16",
+  "backend": "vllm",
+  "thinking_protocol": "native_unforced_v1",
+  "enable_thinking": true,
+  "temperature": 1.0,
+  "top_p": 0.95,
+  "top_k": 64,
+  "presence_penalty": 0.0,
+  "repetition_penalty": 1.0,
+  "min_p": 0.0,
+  "retry_budget": 0,
+  "sampling_source": "https://huggingface.co/google/gemma-4-12B-it#best-practices",
+  "max_model_len": 40960,
+  "max_num_batched_tokens": 8192,
+  "gpu_memory_utilization": 0.7,
+  "enable_prefix_caching": false,
+  "windows_sha256": "3481e7ebe1a91aaa9a0a8ff4e8b2ddff16618c6dfc51e7802d5d758ddf898234",
+  "adapter_sha256": "f4854b5028327c5ceb0469d2c37d060f58424cdc15ec903968da6834d20fbd2c",
+  "packages": {
+    "vllm": "0.33.0",
+    "torch": "2.14.0",
+    "transformers": "5.20.2"
+  }
+}

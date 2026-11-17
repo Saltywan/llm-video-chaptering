@@ -1,0 +1,306 @@
+{
+  "status": "frozen",
+  "purpose": "final test configurations; no test data read before this file",
+  "primary_metric": "exact boundary macro F1 over all test videos, failed video = 0",
+  "format_policy": {
+    "primary": "strict parser (no repair)",
+    "secondary": "envelope-v1 lenient reading, reported separately"
+  },
+  "window_pack_template": {
+    "path": "artifacts/windows/common-v2",
+    "manifest_sha256": "bd3318ccdaf1761ebba1097cd0d46b8bd81e46b12cef071d404721ce03292fb7",
+    "settings": {
+      "train_videos": 16377,
+      "validation_videos": 1446,
+      "input_tokens": 8192,
+      "core_sentences": 100000,
+      "context_sentences": 16,
+      "seed": 393,
+      "census_all": false,
+      "core_search": "bisect"
+    },
+    "prompt_version": "owned-window-outline-v1"
+  },
+  "seed": 393,
+  "shared_code_sha256": {
+    "src/chaptering/windowing.py": "fb253af757e6042cce699ab962aea75229c2a7582b9f0aadd3b8f733767ee029",
+    "src/chaptering/modeling.py": "f7046c1ea345fbd7f10896a3e653c913f698f09c2e3a694f77aecdc56012cec3",
+    "src/chaptering/batching.py": "73e994550fd6dac5288ff6098f7b33ea048544d0e287c080b2b055b2e3f0ca78",
+    "src/chaptering/inference.py": "44a84d29c23116ffd42bb5fda7a8207ae2fddbed5acdb832014169ff0d147d6c",
+    "src/chaptering/evaluation.py": "471b84907778b6efe856f24819873ec75d345fac7eff3ecd4d6521f8d615e0ef",
+    "src/chaptering/data.py": "a8f6c08575f04c05f1ebc215d862a757947666d9719a18bb6cfbb6c83dfbad1c",
+    "scripts/evaluate_predictions.py": "c4dcf86b06f5c500dfefdc1bf817f0e2f0bc97e2d629db4bbb9554d14451f429",
+    "scripts/rescore_envelope.py": "be05663eef6a46cdf15121f84ff1aed8b13ed1af737f94bf38044bb11f2ae61c",
+    "src/chaptering/envelope.py": "79df917193993f4b74cd46567d036502aff1dc1a321944168cdab6621a4d43c1",
+    "scripts/prepare_test.py": "58c27d7864b61f848635fa903ad8f182ed5a379690258fbc79ce62a7b5a8142f",
+    "configs/models.json": "1df5fe05759976dd027b24fe0f25283d5992c973388b263c2140dc7e604c3d7c"
+  },
+  "training_note": "LoRA adapters are the stage-5 one-pass runs on 1,000 training videos (1,306 windows); full-data training did not fit the project deadline",
+  "configurations": {
+    "M1-ZS": {
+      "model_id": "Qwen/Qwen3.5-9B",
+      "model_revision": "c202236235762e1c871ad0ccb60c8ee5ba337b9a",
+      "driver": "scripts/infer_vllm_pair.py",
+      "driver_sha256": "e8ac2ac7b297dc7766034b9968d580f20d5a55178b39a72a227d8b84f9f7fa79",
+      "driver_args": [
+        "--max-num-seqs",
+        "100",
+        "--batch-size",
+        "100",
+        "--max-new-tokens",
+        "32768"
+      ],
+      "arm": "ZS",
+      "dev_template_run_config": null
+    },
+    "M1-FT": {
+      "model_id": "Qwen/Qwen3.5-9B",
+      "model_revision": "c202236235762e1c871ad0ccb60c8ee5ba337b9a",
+      "driver": "scripts/infer_vllm_pair.py",
+      "driver_sha256": "e8ac2ac7b297dc7766034b9968d580f20d5a55178b39a72a227d8b84f9f7fa79",
+      "driver_args": [
+        "--max-num-seqs",
+        "100",
+        "--batch-size",
+        "100",
+        "--max-new-tokens",
+        "32768"
+      ],
+      "arm": "FT",
+      "adapter": "artifacts/stage5-v1/M1-direct-safe/adapter",
+      "adapter_sha256": "ab66da265cf663f8743252082991993b28965d058909ab739b8ddf7297db4e39",
+      "adapter_config_sha256": "4ec99b1e3c02416b1b11e8a8df43337fb77e8c4c47917e5063b3902074973e3c",
+      "training": {
+        "status": "training_complete",
+        "rank": 16,
+        "lora_alpha": 32,
+        "lora_dropout": 0.05,
+        "learning_rate": 0.0002,
+        "lr_schedule": "cosine",
+        "warmup_steps": 10,
+        "grad_accum": 8,
+        "target_modules": [
+          "q_proj",
+          "k_proj",
+          "v_proj",
+          "o_proj"
+        ],
+        "final_context": "native_template_v1",
+        "planned_training_videos": 1000,
+        "planned_steps": 1306,
+        "windows_sha256": "0ec7bcb29153f0da487c2d9b2c2d022d4cce0382c62b9d4b23ec7f964ff9ad2f",
+        "training_seconds": 1044.0346880012657,
+        "seed": 393
+      },
+      "dev_selection_evidence": {
+        "dev_videos": 200,
+        "ft_exact_f1": 0.37872060398680113,
+        "zs_exact_f1": 0.4204642835794761,
+        "ft_minus_zs": -0.04174367959267492,
+        "ci95": [
+          -0.0722819763002171,
+          -0.012023061002392824
+        ],
+        "file": "artifacts/stage5-v1/M1-dev-paired.json",
+        "file_sha256": "30edc1fd3e5cb9e4efa52586be7363edb3d26ce1359eb15c9e5dc55977bfdb65"
+      },
+      "selection": "only adapted candidate for this backbone; kept regardless of dev sign (both ZS and LoRA are reported for every backbone)"
+    },
+    "M2-ZS": {
+      "model_id": "google/gemma-4-12B-it",
+      "model_revision": "43c9d014b231474fa7212dbb48a762566c2b255d",
+      "driver": "scripts/infer_vllm_pair.py",
+      "driver_sha256": "e8ac2ac7b297dc7766034b9968d580f20d5a55178b39a72a227d8b84f9f7fa79",
+      "driver_args": [
+        "--max-num-seqs",
+        "100",
+        "--batch-size",
+        "100",
+        "--max-new-tokens",
+        "32768"
+      ],
+      "arm": "ZS",
+      "dev_template_run_config": null
+    },
+    "M2-FT": {
+      "model_id": "google/gemma-4-12B-it",
+      "model_revision": "43c9d014b231474fa7212dbb48a762566c2b255d",
+      "driver": "scripts/infer_vllm_pair.py",
+      "driver_sha256": "e8ac2ac7b297dc7766034b9968d580f20d5a55178b39a72a227d8b84f9f7fa79",
+      "driver_args": [
+        "--max-num-seqs",
+        "100",
+        "--batch-size",
+        "100",
+        "--max-new-tokens",
+        "32768"
+      ],
+      "arm": "FT",
+      "adapter": "artifacts/stage5-v1/M2-direct-safe/adapter",
+      "adapter_sha256": "4f201a38f5ae17a1d5a8834f85938ba9115a90c01e8d5c909a8e6a36668d9e94",
+      "adapter_config_sha256": "e5004f070675bafef30a2dc8bc2abface82e62324156a5d1b9602469abb2d399",
+      "training": {
+        "status": "training_complete",
+        "rank": 16,
+        "lora_alpha": 32,
+        "lora_dropout": 0.05,
+        "learning_rate": 0.0002,
+        "lr_schedule": "cosine",
+        "warmup_steps": 10,
+        "grad_accum": 8,
+        "target_modules": [
+          "q_proj",
+          "k_proj",
+          "v_proj",
+          "o_proj"
+        ],
+        "final_context": "direct_v1",
+        "planned_training_videos": 1000,
+        "planned_steps": 1306,
+        "windows_sha256": "0ec7bcb29153f0da487c2d9b2c2d022d4cce0382c62b9d4b23ec7f964ff9ad2f",
+        "training_seconds": 2455.9907993760426,
+        "seed": 393
+      },
+      "dev_selection_evidence": {
+        "dev_videos": 200,
+        "ft_exact_f1": 0.34550825149870446,
+        "zs_exact_f1": 0.4594276130884512,
+        "ft_minus_zs": -0.11391936158974675,
+        "ci95": [
+          -0.1436199086648735,
+          -0.08445403545342914
+        ],
+        "file": "artifacts/stage5-v1/M2-dev-paired.json",
+        "file_sha256": "2bc86ebca77010948eab4cb968273a82e4afa3aa8eefbe47012c48991bd26b86"
+      },
+      "selection": "only adapted candidate for this backbone; kept regardless of dev sign (both ZS and LoRA are reported for every backbone)"
+    },
+    "E2-ZS": {
+      "model_id": "google/t5gemma-2b-2b-ul2-it",
+      "model_revision": "6a196a58ce2786cd139a1217a85d1f7b9984e330",
+      "driver": "scripts/infer_seq2seq_batched.py",
+      "driver_sha256": "60e4580cd8d30772da114db0bd9c944e4a7c61b6e19da3fe2b4df7017f7cb9ca",
+      "driver_args": [
+        "--square-budget",
+        "1073741824"
+      ],
+      "arm": "ZS",
+      "dev_template_run_config": "artifacts/stage5-v1/E2-dev-ZS/run_config.json"
+    },
+    "E2-FT": {
+      "model_id": "google/t5gemma-2b-2b-ul2-it",
+      "model_revision": "6a196a58ce2786cd139a1217a85d1f7b9984e330",
+      "driver": "scripts/infer_seq2seq_batched.py",
+      "driver_sha256": "60e4580cd8d30772da114db0bd9c944e4a7c61b6e19da3fe2b4df7017f7cb9ca",
+      "driver_args": [
+        "--square-budget",
+        "1073741824"
+      ],
+      "arm": "FT",
+      "adapter": "artifacts/stage5-v1/E2-native-safe/adapter",
+      "adapter_sha256": "9b53a7ceb5728807219814115a142246b0e79cd6fd0d94bb741002ae76b78bd0",
+      "adapter_config_sha256": "1aa346485bcb296a38675883408b0c2db201df7510d890b685e4feb0398966d0",
+      "training": {
+        "status": "training_complete",
+        "rank": 16,
+        "lora_alpha": 32,
+        "lora_dropout": 0.05,
+        "learning_rate": 0.0002,
+        "lr_schedule": "cosine",
+        "warmup_steps": 10,
+        "grad_accum": 8,
+        "target_modules": [
+          "q_proj",
+          "k_proj",
+          "v_proj",
+          "o_proj"
+        ],
+        "final_context": "native_template_v1",
+        "planned_training_videos": 1000,
+        "planned_steps": 1306,
+        "windows_sha256": "0ec7bcb29153f0da487c2d9b2c2d022d4cce0382c62b9d4b23ec7f964ff9ad2f",
+        "training_seconds": 1739.1602409703191,
+        "seed": 393
+      },
+      "dev_selection_evidence": {
+        "dev_videos": 200,
+        "ft_exact_f1": 0.5120032767424026,
+        "zs_exact_f1": 0.19106750571239317,
+        "ft_minus_zs": 0.3209357710300095,
+        "ci95": [
+          0.27605907531806373,
+          0.36651021890914565
+        ],
+        "file": "artifacts/stage5-v1/E2-dev-paired.json",
+        "file_sha256": "8f144853f9ea42eb9a686c3bd427025a2900645adfafd59bd627e6675176ffb6"
+      },
+      "selection": "only adapted candidate for this backbone; kept regardless of dev sign (both ZS and LoRA are reported for every backbone)"
+    },
+    "E1-ZS": {
+      "model_id": "google/t5gemma-9b-2b-ul2-it",
+      "model_revision": "99b9b9da34b8e66e2290c5c6d17306231c5b2566",
+      "driver": "scripts/infer_seq2seq_batched.py",
+      "driver_sha256": "60e4580cd8d30772da114db0bd9c944e4a7c61b6e19da3fe2b4df7017f7cb9ca",
+      "driver_args": [
+        "--square-budget",
+        "536870912"
+      ],
+      "arm": "ZS",
+      "dev_template_run_config": "artifacts/stage5-v1/E1-dev-ZS/run_config.json"
+    },
+    "E1-FT": {
+      "model_id": "google/t5gemma-9b-2b-ul2-it",
+      "model_revision": "99b9b9da34b8e66e2290c5c6d17306231c5b2566",
+      "driver": "scripts/infer_seq2seq_batched.py",
+      "driver_sha256": "60e4580cd8d30772da114db0bd9c944e4a7c61b6e19da3fe2b4df7017f7cb9ca",
+      "driver_args": [
+        "--square-budget",
+        "536870912"
+      ],
+      "arm": "FT",
+      "adapter": "artifacts/stage5-v1/E1-native-safe/adapter",
+      "adapter_sha256": "1aadc26007ebe6d92819fe1e37069450908d39055a885bd0479e086f744c382f",
+      "adapter_config_sha256": "de3556238a778fe5777c0358a44f02b58736c2c50531218869c91650c13fad62",
+      "training": {
+        "status": "training_complete",
+        "rank": 16,
+        "lora_alpha": 32,
+        "lora_dropout": 0.05,
+        "learning_rate": 0.0002,
+        "lr_schedule": "cosine",
+        "warmup_steps": 10,
+        "grad_accum": 8,
+        "target_modules": [
+          "q_proj",
+          "k_proj",
+          "v_proj",
+          "o_proj"
+        ],
+        "final_context": "native_template_v1",
+        "planned_training_videos": 1000,
+        "planned_steps": 1306,
+        "windows_sha256": "0ec7bcb29153f0da487c2d9b2c2d022d4cce0382c62b9d4b23ec7f964ff9ad2f",
+        "training_seconds": 2821.3239503146615,
+        "seed": 393
+      },
+      "dev_selection_evidence": null,
+      "selection": "only adapted candidate for this backbone; kept regardless of dev sign (both ZS and LoRA are reported for every backbone)"
+    }
+  },
+  "amendments": [
+    {
+      "time_utc": "2026-11-16T20:44Z",
+      "file": "scripts/prepare_test.py",
+      "old_sha256": "e8189ba1c45bf67f8531051277ebf15f26994580b8b7f4f688104575d95a65a7",
+      "new_sha256": "58c27d7864b61f848635fa903ad8f182ed5a379690258fbc79ce62a7b5a8142f",
+      "reason": "first test-pack attempt stopped at the source-audit gate check before reading any test data (the original audit fails its overall gate only for train duplicates, resolved separately); check replaced by test-specific integrity checks. No model, adapter, decoding or window setting changed."
+    },
+    {
+      "time_utc": "2026-11-16T21:20Z",
+      "file": "src/chaptering/modeling.py",
+      "old_sha256": "b76c65f054ff5108efe0f4d0b1452cd37e799b24ec68448e01043826802564ab",
+      "new_sha256": "f7046c1ea345fbd7f10896a3e653c913f698f09c2e3a694f77aecdc56012cec3",
+      "reason": "authorized physical GPU2 (2026-11-17); the loader now also accepts the GPU2 UUID mask so the E1 zero-shot test run can execute on GPU2. Only the device-identity check changed; model loading, prompts, decoding and windows are identical."
+    }
+  ]
+}

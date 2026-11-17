@@ -1,0 +1,15 @@
+{
+  "dataset": "retkowski/ytseg",
+  "config": "text",
+  "revision": "4ee1c1fccc5a9e118ff0918f3df1e61aadca8970",
+  "rows_seen": 1448,
+  "valid_rows": 1448,
+  "invalid_rows": [],
+  "duplicate_ids": [],
+  "source_audit_test_unique_ids": 1448,
+  "unique_ids": 1448,
+  "overlap_with_resolved_train_validation": [],
+  "freeze_sha256": "e9c46fc01edb4b1c4009ee1e035282402255a666aac7bfb8b44f8595ecb3b976",
+  "test_sha256": "0e0c2731b7b3ed5d528a095f09da192e9c02d468c8077cadc5b7bf35475abf99",
+  "passed": true
+}

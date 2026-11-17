@@ -1,0 +1,144 @@
+{
+ "additional_metrics": {
+  "boundary_similarity": {
+   "failed_request_score": 0.0,
+   "macro_all_requests": 0.14471286978871653,
+   "metadata": {
+    "boundary_format": "mass",
+    "implementation": "segeval",
+    "n_t": 2,
+    "name": "Boundary Similarity",
+    "one_minus": false,
+    "package_version": "2.0.11",
+    "return_parts": false,
+    "unit": "sentences"
+   }
+  },
+  "titles": {
+   "failed_videos": 392,
+   "matched_chapters": 3123,
+   "matching_policy": {
+    "boundary_tolerance": 2,
+    "span_iou_threshold": 0.5,
+    "structural_window": "reference_half_mean_half_up_N_minus_k",
+    "version": 1
+   },
+   "predicted_chapters_successful_requests": 8860,
+   "prediction_coverage_successful_requests": 0.3524830699774266,
+   "reference_chapters_all_requests": 13296,
+   "reference_coverage_all_requests": 0.2348826714801444,
+   "requested_videos": 1448,
+   "rouge_l": {
+    "concatenated_document_macro_all_requests": {
+     "f1": 0.18443954947243923,
+     "precision": 0.20499754990822583,
+     "recall": 0.2402539742906877
+    },
+    "concatenation_separator": "\n",
+    "failed_document_score": 0.0,
+    "matched_only_mean": {
+     "f1": 0.34724239416909314,
+     "precision": 0.3529880153804246,
+     "recall": 0.388929405454304
+    },
+    "metadata": {
+     "implementation": "rouge-score",
+     "name": "rougeL",
+     "package_version": "0.1.2",
+     "scale": "0_to_1",
+     "use_stemmer": false
+    },
+    "reference_chapter_mean_with_unmatched_zero": {
+     "f1": 0.08156122119359792,
+     "precision": 0.08291076805302844,
+     "recall": 0.09135277777029117
+    }
+   },
+   "semantic": {
+    "matched_only_mean": {
+     "f1": 0.9027564097321114,
+     "precision": 0.897386540387099,
+     "recall": 0.9088730296567965
+    },
+    "metadata": {
+     "batch_size": 16,
+     "device": "cpu",
+     "idf": false,
+     "implementation": "bert-score",
+     "local_files_only": true,
+     "model_id": "FacebookAI/roberta-large",
+     "name": "BERTScore",
+     "num_layers": 17,
+     "package_version": "0.3.13",
+     "rescale_with_baseline": false,
+     "revision": "722cf37b1afa9454edce342e7895e588b6ff1d59",
+     "scope": "span-matched individual titles; no concatenated-document semantic score",
+     "use_fast_tokenizer": false
+    },
+    "reference_chapter_mean_with_unmatched_zero": {
+     "f1": 0.21204183721370215,
+     "precision": 0.2107805479564463,
+     "recall": 0.2134785252420409
+    },
+    "scope": "span-matched individual chapter titles",
+    "zero_fill_is_reporting_convention_not_semantic_lower_bound": true
+   }
+  }
+ },
+ "canonical": {
+  "aggregate": {
+   "all_requests_micro": null,
+   "failed_videos": 392,
+   "failure_rate": 0.27071823204419887,
+   "macro_exact_f1": 0.15654722684232875,
+   "macro_pk": 0.5478227368742158,
+   "macro_tolerant_f1": 0.2483685099025955,
+   "macro_window_diff": 0.5762493466616221,
+   "metric_policy": {
+    "boundary_tolerance": 2,
+    "span_iou_threshold": 0.5,
+    "structural_window": "reference_half_mean_half_up_N_minus_k",
+    "version": 1
+   },
+   "requested_videos": 1448,
+   "status_counts": {
+    "invalid": 341,
+    "ok": 1056,
+    "truncated": 51
+   },
+   "successful_only_micro": {
+    "exact": {
+     "f1": 0.25415997430131704,
+     "fn": 5783,
+     "fp": 5826,
+     "precision": 0.25345976422347516,
+     "recall": 0.25486406390929006,
+     "tp": 1978
+    },
+    "excluded_failures": 392,
+    "tolerant": {
+     "f1": 0.38663668486990044,
+     "fn": 4752,
+     "fp": 4795,
+     "precision": 0.38557150179395183,
+     "recall": 0.38770776961731734,
+     "tp": 3009
+    },
+    "videos": 1056
+   },
+   "successful_videos": 1056,
+   "title_span_alignment": {
+    "matched_chapters": 3123,
+    "predicted_chapters_successful_requests": 8860,
+    "prediction_coverage_successful_requests": 0.3524830699774266,
+    "reference_chapters_all_requests": 13296,
+    "reference_coverage_all_requests": 0.2348826714801444
+   }
+  }
+ },
+ "input_files": {
+  "left_predictions": "artifacts/heldout-test-v1/envelope-E2-ZS.predictions.jsonl",
+  "references": "artifacts/windows/test-v1/test_records.jsonl",
+  "right_predictions": null
+ }
+}

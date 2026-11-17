@@ -1,0 +1,301 @@
+{
+ "additional_metrics": {
+  "boundary_similarity": {
+   "failed_request_score": 0.0,
+   "macro_all_requests": 0.3666198023140186,
+   "metadata": {
+    "boundary_format": "mass",
+    "implementation": "segeval",
+    "n_t": 2,
+    "name": "Boundary Similarity",
+    "one_minus": false,
+    "package_version": "2.0.11",
+    "return_parts": false,
+    "unit": "sentences"
+   }
+  },
+  "titles": {
+   "failed_videos": 10,
+   "matched_chapters": 1240,
+   "matching_policy": {
+    "boundary_tolerance": 2,
+    "span_iou_threshold": 0.5,
+    "structural_window": "reference_half_mean_half_up_N_minus_k",
+    "version": 1
+   },
+   "predicted_chapters_successful_requests": 1881,
+   "prediction_coverage_successful_requests": 0.6592238171185539,
+   "reference_chapters_all_requests": 1908,
+   "reference_coverage_all_requests": 0.649895178197065,
+   "requested_videos": 200,
+   "rouge_l": {
+    "concatenated_document_macro_all_requests": {
+     "f1": 0.27195864191978536,
+     "precision": 0.28461725600609944,
+     "recall": 0.3099081116324307
+    },
+    "concatenation_separator": "\n",
+    "failed_document_score": 0.0,
+    "matched_only_mean": {
+     "f1": 0.356119332172538,
+     "precision": 0.3699078396843677,
+     "recall": 0.3914202486581519
+    },
+    "metadata": {
+     "implementation": "rouge-score",
+     "name": "rougeL",
+     "package_version": "0.1.2",
+     "scale": "0_to_1",
+     "use_stemmer": false
+    },
+    "reference_chapter_mean_with_unmatched_zero": {
+     "f1": 0.23144023684169135,
+     "precision": 0.24040132138816347,
+     "recall": 0.2543821322516291
+    }
+   },
+   "semantic": {
+    "matched_only_mean": {
+     "f1": 0.904921504134132,
+     "precision": 0.9031628249153014,
+     "recall": 0.9072560131069153
+    },
+    "metadata": {
+     "batch_size": 16,
+     "device": "cpu",
+     "idf": false,
+     "implementation": "bert-score",
+     "local_files_only": true,
+     "model_id": "FacebookAI/roberta-large",
+     "name": "BERTScore",
+     "num_layers": 17,
+     "package_version": "0.3.13",
+     "rescale_with_baseline": false,
+     "revision": "722cf37b1afa9454edce342e7895e588b6ff1d59",
+     "scope": "span-matched individual titles; no concatenated-document semantic score",
+     "use_fast_tokenizer": false
+    },
+    "reference_chapter_mean_with_unmatched_zero": {
+     "f1": 0.5881041221836079,
+     "precision": 0.5869611650392944,
+     "recall": 0.5896213083084775
+    },
+    "scope": "span-matched individual chapter titles",
+    "zero_fill_is_reporting_convention_not_semantic_lower_bound": true
+   }
+  }
+ },
+ "canonical": {
+  "aggregate": {
+   "all_requests_micro": null,
+   "failed_videos": 10,
+   "failure_rate": 0.05,
+   "macro_exact_f1": 0.37872060398680113,
+   "macro_pk": 0.3122732643104613,
+   "macro_tolerant_f1": 0.5979926600521084,
+   "macro_window_diff": 0.3414594353848802,
+   "metric_policy": {
+    "boundary_tolerance": 2,
+    "span_iou_threshold": 0.5,
+    "structural_window": "reference_half_mean_half_up_N_minus_k",
+    "version": 1
+   },
+   "requested_videos": 200,
+   "status_counts": {
+    "invalid": 9,
+    "ok": 190,
+    "truncated": 1
+   },
+   "successful_only_micro": {
+    "exact": {
+     "f1": 0.4196620583717358,
+     "fn": 881,
+     "fp": 1008,
+     "precision": 0.4039030159668835,
+     "recall": 0.4367007672634271,
+     "tp": 683
+    },
+    "excluded_failures": 10,
+    "tolerant": {
+     "f1": 0.6482334869431644,
+     "fn": 509,
+     "fp": 636,
+     "precision": 0.6238911886457718,
+     "recall": 0.6745524296675192,
+     "tp": 1055
+    },
+    "videos": 190
+   },
+   "successful_videos": 190,
+   "title_span_alignment": {
+    "matched_chapters": 1240,
+    "predicted_chapters_successful_requests": 1881,
+    "prediction_coverage_successful_requests": 0.6592238171185539,
+    "reference_chapters_all_requests": 1908,
+    "reference_coverage_all_requests": 0.649895178197065
+   }
+  }
+ },
+ "comparison": {
+  "paired_exact_f1_bootstrap": {
+   "confidence": 0.95,
+   "confidence_interval": [
+    -0.0722819763002171,
+    -0.012023061002392824
+   ],
+   "difference": "left_minus_right",
+   "estimator": "mean_paired_video_exact_f1_difference",
+   "interval_method": "percentile_linear_interpolation",
+   "left_failed_videos": 10,
+   "mean_difference": -0.04174367959267492,
+   "paired_video_ids_sha256": "b4667495e71cc565cf1a892f4d6e7d37bb81368a5d2093771633b7685d145ed4",
+   "resamples": 10000,
+   "right_failed_videos": 1,
+   "seed": 20261116,
+   "videos": 200
+  },
+  "right_arm": {
+   "additional_metrics": {
+    "boundary_similarity": {
+     "failed_request_score": 0.0,
+     "macro_all_requests": 0.4034500812165655,
+     "metadata": {
+      "boundary_format": "mass",
+      "implementation": "segeval",
+      "n_t": 2,
+      "name": "Boundary Similarity",
+      "one_minus": false,
+      "package_version": "2.0.11",
+      "return_parts": false,
+      "unit": "sentences"
+     }
+    },
+    "titles": {
+     "failed_videos": 1,
+     "matched_chapters": 1369,
+     "matching_policy": {
+      "boundary_tolerance": 2,
+      "span_iou_threshold": 0.5,
+      "structural_window": "reference_half_mean_half_up_N_minus_k",
+      "version": 1
+     },
+     "predicted_chapters_successful_requests": 2225,
+     "prediction_coverage_successful_requests": 0.6152808988764045,
+     "reference_chapters_all_requests": 1908,
+     "reference_coverage_all_requests": 0.7175052410901468,
+     "requested_videos": 200,
+     "rouge_l": {
+      "concatenated_document_macro_all_requests": {
+       "f1": 0.2563287390078021,
+       "precision": 0.25490098602074807,
+       "recall": 0.29994318427028444
+      },
+      "concatenation_separator": "\n",
+      "failed_document_score": 0.0,
+      "matched_only_mean": {
+       "f1": 0.3050076072731081,
+       "precision": 0.31702986770554337,
+       "recall": 0.3377953148223419
+      },
+      "metadata": {
+       "implementation": "rouge-score",
+       "name": "rougeL",
+       "package_version": "0.1.2",
+       "scale": "0_to_1",
+       "use_stemmer": false
+      },
+      "reference_chapter_mean_with_unmatched_zero": {
+       "f1": 0.2188445567908202,
+       "precision": 0.2274705916608432,
+       "recall": 0.2423699088007264
+      }
+     },
+     "semantic": {
+      "matched_only_mean": {
+       "f1": 0.8970610763227269,
+       "precision": 0.894562082755644,
+       "recall": 0.9000974704611466
+      },
+      "metadata": {
+       "batch_size": 16,
+       "device": "cpu",
+       "idf": false,
+       "implementation": "bert-score",
+       "local_files_only": true,
+       "model_id": "FacebookAI/roberta-large",
+       "name": "BERTScore",
+       "num_layers": 17,
+       "package_version": "0.3.13",
+       "rescale_with_baseline": false,
+       "revision": "722cf37b1afa9454edce342e7895e588b6ff1d59",
+       "scope": "span-matched individual titles; no concatenated-document semantic score",
+       "use_fast_tokenizer": false
+      },
+      "reference_chapter_mean_with_unmatched_zero": {
+       "f1": 0.6436460238395247,
+       "precision": 0.6418529828576922,
+       "recall": 0.6458246525478563
+      },
+      "scope": "span-matched individual chapter titles",
+      "zero_fill_is_reporting_convention_not_semantic_lower_bound": true
+     }
+    }
+   },
+   "canonical": {
+    "aggregate": {
+     "all_requests_micro": null,
+     "failed_videos": 1,
+     "failure_rate": 0.005,
+     "macro_exact_f1": 0.4204642835794761,
+     "macro_pk": 0.2774790467659546,
+     "macro_tolerant_f1": 0.6452330029523183,
+     "macro_window_diff": 0.31557946866382286,
+     "metric_policy": {
+      "boundary_tolerance": 2,
+      "span_iou_threshold": 0.5,
+      "structural_window": "reference_half_mean_half_up_N_minus_k",
+      "version": 1
+     },
+     "requested_videos": 200,
+     "status_counts": {
+      "invalid": 1,
+      "ok": 199
+     },
+     "successful_only_micro": {
+      "exact": {
+       "f1": 0.4238339174979779,
+       "fn": 897,
+       "fp": 1240,
+       "precision": 0.38795656465942746,
+       "recall": 0.46702317290552586,
+       "tp": 786
+      },
+      "excluded_failures": 1,
+      "tolerant": {
+       "f1": 0.6443785386896738,
+       "fn": 488,
+       "fp": 831,
+       "precision": 0.589832181638697,
+       "recall": 0.7100415923945336,
+       "tp": 1195
+      },
+      "videos": 199
+     },
+     "successful_videos": 199,
+     "title_span_alignment": {
+      "matched_chapters": 1369,
+      "predicted_chapters_successful_requests": 2225,
+      "prediction_coverage_successful_requests": 0.6152808988764045,
+      "reference_chapters_all_requests": 1908,
+      "reference_coverage_all_requests": 0.7175052410901468
+     }
+    }
+   }
+  }
+ },
+ "input_files": {
+  "left_predictions": "artifacts/stage5-v1/M1-dev/FT/predictions.jsonl",
+  "references": "artifacts/windows/dev-v2/validation_records.jsonl",
+  "right_predictions": "artifacts/stage5-v1/M1-dev/ZS/predictions.jsonl"
+ }
+}

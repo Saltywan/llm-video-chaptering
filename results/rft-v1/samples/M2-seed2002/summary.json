@@ -1,0 +1,17 @@
+{
+  "alias": "M2",
+  "arm": "ZS",
+  "backend": "vllm_endpoint",
+  "requested_videos": 233,
+  "requested_windows": 300,
+  "status_counts": {
+    "ok": 233
+  },
+  "window_status_counts": {
+    "ok": 300
+  },
+  "completion_tokens": 1554757,
+  "this_invocation_windows": 300,
+  "this_invocation_seconds": 2887.5725644009653,
+  "concurrency": 16
+}

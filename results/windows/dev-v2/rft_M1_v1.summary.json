@@ -1,0 +1,20 @@
+{
+  "recipe": "rft_self_samples_v1",
+  "min_f1": 0.5,
+  "manifest_windows": 300,
+  "samples_read": 1200,
+  "kept_windows": 146,
+  "drop_counts": {
+    "window_best_below_min_f1": 154,
+    "sample_not_ok": 1
+  },
+  "mean_valid_sample_f1": 0.3617802474210063,
+  "mean_kept_f1": 0.699105979120673,
+  "sample_files": [
+    "artifacts/rft-v1/samples/M1-seed1001/windows.jsonl",
+    "artifacts/rft-v1/samples/M1-seed2002/windows.jsonl",
+    "artifacts/rft-v1/samples/M1-seed3003/windows.jsonl",
+    "artifacts/rft-v1/samples/M1-seed4004/windows.jsonl"
+  ],
+  "output_sha256": "d5c6d1c7cf2b027b702f08ffb93c5eb731fc50e33e44e2925e47749baec3d385"
+}

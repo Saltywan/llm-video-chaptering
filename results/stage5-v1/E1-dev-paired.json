@@ -1,0 +1,278 @@
+{
+ "additional_metrics": {
+  "boundary_similarity": {
+   "failed_request_score": 0.0,
+   "macro_all_requests": 0.48394423506232775,
+   "metadata": {
+    "boundary_format": "mass",
+    "implementation": "segeval",
+    "n_t": 2,
+    "name": "Boundary Similarity",
+    "one_minus": false,
+    "package_version": "2.0.11",
+    "return_parts": false,
+    "unit": "sentences"
+   }
+  },
+  "titles": {
+   "failed_videos": 2,
+   "matched_chapters": 1326,
+   "matching_policy": {
+    "boundary_tolerance": 2,
+    "span_iou_threshold": 0.5,
+    "structural_window": "reference_half_mean_half_up_N_minus_k",
+    "version": 1
+   },
+   "predicted_chapters_successful_requests": 1779,
+   "prediction_coverage_successful_requests": 0.7453625632377741,
+   "reference_chapters_all_requests": 1908,
+   "reference_coverage_all_requests": 0.6949685534591195,
+   "requested_videos": 200,
+   "rouge_l": {
+    "concatenated_document_macro_all_requests": {
+     "f1": 0.36196571476804545,
+     "precision": 0.4228926474612952,
+     "recall": 0.3566863701439125
+    },
+    "concatenation_separator": "\n",
+    "failed_document_score": 0.0,
+    "matched_only_mean": {
+     "f1": 0.43011054940716176,
+     "precision": 0.48190827446304935,
+     "recall": 0.426919614447895
+    },
+    "metadata": {
+     "implementation": "rouge-score",
+     "name": "rougeL",
+     "package_version": "0.1.2",
+     "scale": "0_to_1",
+     "use_stemmer": false
+    },
+    "reference_chapter_mean_with_unmatched_zero": {
+     "f1": 0.2989133063490023,
+     "precision": 0.33491109640356576,
+     "recall": 0.29669570689617863
+    }
+   },
+   "semantic": {
+    "matched_only_mean": {
+     "f1": 0.9199165594433947,
+     "precision": 0.9241006028688151,
+     "recall": 0.9163277649052363
+    },
+    "metadata": {
+     "batch_size": 16,
+     "device": "cpu",
+     "idf": false,
+     "implementation": "bert-score",
+     "local_files_only": true,
+     "model_id": "FacebookAI/roberta-large",
+     "name": "BERTScore",
+     "num_layers": 17,
+     "package_version": "0.3.13",
+     "rescale_with_baseline": false,
+     "revision": "722cf37b1afa9454edce342e7895e588b6ff1d59",
+     "scope": "span-matched individual titles; no concatenated-document semantic score",
+     "use_fast_tokenizer": false
+    },
+    "reference_chapter_mean_with_unmatched_zero": {
+     "f1": 0.6393130806194661,
+     "precision": 0.6422208592264408,
+     "recall": 0.6368189812706202
+    },
+    "scope": "span-matched individual chapter titles",
+    "zero_fill_is_reporting_convention_not_semantic_lower_bound": true
+   }
+  }
+ },
+ "canonical": {
+  "aggregate": {
+   "all_requests_micro": null,
+   "failed_videos": 2,
+   "failure_rate": 0.01,
+   "macro_exact_f1": 0.5078682380382744,
+   "macro_pk": 0.22771742252241756,
+   "macro_tolerant_f1": 0.679416190372303,
+   "macro_window_diff": 0.25110546837961284,
+   "metric_policy": {
+    "boundary_tolerance": 2,
+    "span_iou_threshold": 0.5,
+    "structural_window": "reference_half_mean_half_up_N_minus_k",
+    "version": 1
+   },
+   "requested_videos": 200,
+   "status_counts": {
+    "invalid": 2,
+    "ok": 198
+   },
+   "successful_only_micro": {
+    "exact": {
+     "f1": 0.525030525030525,
+     "fn": 835,
+     "fp": 721,
+     "precision": 0.5439595192915876,
+     "recall": 0.5073746312684366,
+     "tp": 860
+    },
+    "excluded_failures": 2,
+    "tolerant": {
+     "f1": 0.6996336996336996,
+     "fn": 549,
+     "fp": 435,
+     "precision": 0.7248576850094877,
+     "recall": 0.6761061946902654,
+     "tp": 1146
+    },
+    "videos": 198
+   },
+   "successful_videos": 198,
+   "title_span_alignment": {
+    "matched_chapters": 1326,
+    "predicted_chapters_successful_requests": 1779,
+    "prediction_coverage_successful_requests": 0.7453625632377741,
+    "reference_chapters_all_requests": 1908,
+    "reference_coverage_all_requests": 0.6949685534591195
+   }
+  }
+ },
+ "comparison": {
+  "paired_exact_f1_bootstrap": {
+   "confidence": 0.95,
+   "confidence_interval": [
+    0.4655886749509967,
+    0.5498948788024505
+   ],
+   "difference": "left_minus_right",
+   "estimator": "mean_paired_video_exact_f1_difference",
+   "interval_method": "percentile_linear_interpolation",
+   "left_failed_videos": 2,
+   "mean_difference": 0.5078682380382744,
+   "paired_video_ids_sha256": "b4667495e71cc565cf1a892f4d6e7d37bb81368a5d2093771633b7685d145ed4",
+   "resamples": 10000,
+   "right_failed_videos": 200,
+   "seed": 20261116,
+   "videos": 200
+  },
+  "right_arm": {
+   "additional_metrics": {
+    "boundary_similarity": {
+     "failed_request_score": 0.0,
+     "macro_all_requests": 0.0,
+     "metadata": {
+      "boundary_format": "mass",
+      "implementation": "segeval",
+      "n_t": 2,
+      "name": "Boundary Similarity",
+      "one_minus": false,
+      "package_version": "2.0.11",
+      "return_parts": false,
+      "unit": "sentences"
+     }
+    },
+    "titles": {
+     "failed_videos": 200,
+     "matched_chapters": 0,
+     "matching_policy": {
+      "boundary_tolerance": 2,
+      "span_iou_threshold": 0.5,
+      "structural_window": "reference_half_mean_half_up_N_minus_k",
+      "version": 1
+     },
+     "predicted_chapters_successful_requests": 0,
+     "prediction_coverage_successful_requests": null,
+     "reference_chapters_all_requests": 1908,
+     "reference_coverage_all_requests": 0.0,
+     "requested_videos": 200,
+     "rouge_l": {
+      "concatenated_document_macro_all_requests": {
+       "f1": 0.0,
+       "precision": 0.0,
+       "recall": 0.0
+      },
+      "concatenation_separator": "\n",
+      "failed_document_score": 0.0,
+      "matched_only_mean": null,
+      "metadata": {
+       "implementation": "rouge-score",
+       "name": "rougeL",
+       "package_version": "0.1.2",
+       "scale": "0_to_1",
+       "use_stemmer": false
+      },
+      "reference_chapter_mean_with_unmatched_zero": {
+       "f1": 0.0,
+       "precision": 0.0,
+       "recall": 0.0
+      }
+     },
+     "semantic": {
+      "matched_only_mean": null,
+      "metadata": {
+       "batch_size": 16,
+       "device": "cpu",
+       "idf": false,
+       "implementation": "bert-score",
+       "local_files_only": true,
+       "model_id": "FacebookAI/roberta-large",
+       "name": "BERTScore",
+       "num_layers": 17,
+       "package_version": "0.3.13",
+       "rescale_with_baseline": false,
+       "revision": "722cf37b1afa9454edce342e7895e588b6ff1d59",
+       "scope": "span-matched individual titles; no concatenated-document semantic score",
+       "use_fast_tokenizer": false
+      },
+      "reference_chapter_mean_with_unmatched_zero": {
+       "f1": 0.0,
+       "precision": 0.0,
+       "recall": 0.0
+      },
+      "scope": "span-matched individual chapter titles",
+      "zero_fill_is_reporting_convention_not_semantic_lower_bound": true
+     }
+    }
+   },
+   "canonical": {
+    "aggregate": {
+     "all_requests_micro": null,
+     "failed_videos": 200,
+     "failure_rate": 1.0,
+     "macro_exact_f1": 0.0,
+     "macro_pk": 1.0,
+     "macro_tolerant_f1": 0.0,
+     "macro_window_diff": 1.0,
+     "metric_policy": {
+      "boundary_tolerance": 2,
+      "span_iou_threshold": 0.5,
+      "structural_window": "reference_half_mean_half_up_N_minus_k",
+      "version": 1
+     },
+     "requested_videos": 200,
+     "status_counts": {
+      "invalid": 184,
+      "truncated": 16
+     },
+     "successful_only_micro": {
+      "exact": null,
+      "excluded_failures": 200,
+      "tolerant": null,
+      "videos": 0
+     },
+     "successful_videos": 0,
+     "title_span_alignment": {
+      "matched_chapters": 0,
+      "predicted_chapters_successful_requests": 0,
+      "prediction_coverage_successful_requests": null,
+      "reference_chapters_all_requests": 1908,
+      "reference_coverage_all_requests": 0.0
+     }
+    }
+   }
+  }
+ },
+ "input_files": {
+  "left_predictions": "artifacts/stage5-v1/E1-dev-FT/predictions.jsonl",
+  "references": "artifacts/windows/dev-v2/validation_records.jsonl",
+  "right_predictions": "artifacts/stage5-v1/E1-dev-ZS/predictions.jsonl"
+ }
+}

@@ -1,0 +1,18 @@
+.venv/
+__pycache__/
+*.py[cod]
+.ipynb_checkpoints/
+.DS_Store
+.env
+.env.*
+!.env.example
+data/
+checkpoints/
+models/
+*.safetensors
+*.pt
+*.bin
+
+# Full run outputs: transcripts and windows (YTSeg-derived), raw outputs with thinking, adapters.
+# The small, shareable subset is kept in results/.
+artifacts/

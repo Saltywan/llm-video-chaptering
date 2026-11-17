@@ -1,0 +1,26 @@
+{
+  "alias": "E2",
+  "windows": "artifacts/windows/dev-v2/validation_windows.jsonl",
+  "output": "artifacts/stage5-v1/E2-dev-FT",
+  "adapter": "artifacts/stage5-v1/E2-native-safe/adapter",
+  "attention": null,
+  "max_new_tokens": 4096,
+  "tiers": [
+    384,
+    1536,
+    4096
+  ],
+  "max_batch": 64,
+  "square_budget": 1073741824,
+  "max_videos": null,
+  "purpose": "validation only, not final test results",
+  "decoding": "greedy",
+  "window_manifest_sha256": "3481e7ebe1a91aaa9a0a8ff4e8b2ddff16618c6dfc51e7802d5d758ddf898234",
+  "requested_videos": 200,
+  "requested_windows": 270,
+  "packages": {
+    "torch": "2.14.0",
+    "transformers": "5.23.0",
+    "peft": "0.21.3"
+  }
+}

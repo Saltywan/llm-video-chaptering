@@ -1,0 +1,40 @@
+{
+  "alias": "M1",
+  "windows": "artifacts/windows/test-v1/test_windows.jsonl",
+  "adapter": "artifacts/stage5-v1/M1-direct-safe/adapter",
+  "arms": [
+    "ZS",
+    "FT"
+  ],
+  "batch_size": 100,
+  "output": "artifacts/heldout-test-v1/M1",
+  "max_num_seqs": 100,
+  "max_new_tokens": 32768,
+  "seed": 393,
+  "purpose": "held-out test; frozen configuration configs/frozen_test.json; run once",
+  "model_revision": "c202236235762e1c871ad0ccb60c8ee5ba337b9a",
+  "dtype": "bfloat16",
+  "lora_dtype": "bfloat16",
+  "backend": "vllm",
+  "thinking_protocol": "native_unforced_v1",
+  "enable_thinking": true,
+  "temperature": 1.0,
+  "top_p": 0.95,
+  "top_k": 20,
+  "presence_penalty": 1.5,
+  "repetition_penalty": 1.0,
+  "min_p": 0.0,
+  "retry_budget": 0,
+  "sampling_source": "https://huggingface.co/Qwen/Qwen3.5-9B#best-practices",
+  "max_model_len": 40960,
+  "max_num_batched_tokens": 8192,
+  "gpu_memory_utilization": 0.7,
+  "enable_prefix_caching": false,
+  "windows_sha256": "485ec672bd4c4a18320005805d88c0551dcfcaa19a2ea12d88151b402738f808",
+  "adapter_sha256": "ab66da265cf663f8743252082991993b28965d058909ab739b8ddf7297db4e39",
+  "packages": {
+    "vllm": "0.33.0",
+    "torch": "2.14.0",
+    "transformers": "5.20.2"
+  }
+}

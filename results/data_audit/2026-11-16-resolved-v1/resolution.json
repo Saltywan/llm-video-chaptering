@@ -1,0 +1,191 @@
+{
+  "schema_version": 1,
+  "source_directory": "<server-project-dir>/artifacts/data_audit/2026-11-16-v1",
+  "output_directory": "<server-project-dir>/artifacts/data_audit/2026-11-16-resolved-v1",
+  "dataset": "retkowski/ytseg",
+  "config": "text",
+  "revision": "4ee1c1fccc5a9e118ff0918f3df1e61aadca8970",
+  "policy": {
+    "training_exclusion": "Remove every training row whose video_id occurs in the ORIGINAL validation file, even if that validation ID is quarantined.",
+    "identical_duplicates": "Keep first source occurrence within each split; identity is exact sentences+reference, excluding provenance.",
+    "conflicts": "Quarantine all occurrences of any within-split ID with multiple content fingerprints; never choose one variant.",
+    "overlapping_removal_reasons": "Conflict quarantine includes cross-split-excluded rows; exclusive_removed_counts avoids double counting.",
+    "partitions": "No record changes partition; output files are unmodified source-record subsets.",
+    "smoke": "Regenerated at sentence-count quantiles .1/.5/.9, ties by video_id, before model results.",
+    "test": "No test content read. Inherit zero overlap only from hash-verified full source audit and subset-preserving resolution."
+  },
+  "source_files_sha256": {
+    "train.jsonl": "a1b4b621ce1b28321a08874da4ea368994b9d39c90dfb5fcae8d914c8b3e9d94",
+    "validation.jsonl": "9f3e192916dceb7b7cdda97ffdd3b9bce7a3bbadc1e6216bdd33cc20759d97a2",
+    "audit.json": "3164ec08f94411ed01cf9753d998e2ba8dd670e140ad61c0f3f287935437117d"
+  },
+  "source_gate_evidence": {
+    "source_audit_full": true,
+    "source_invalid_rows_zero": true,
+    "source_error_counts_empty": true,
+    "source_counts_match_canonical_files": true,
+    "source_canonical_hashes_match_audit": true,
+    "source_has_no_test_overlap": true,
+    "source_test_ids_unique": true,
+    "source_files_unchanged_during_resolution": true
+  },
+  "original_and_resolved_counts": {
+    "train": {
+      "original_rows": 16404,
+      "original_unique_ids": 16387,
+      "resolved_rows": 16377,
+      "resolved_unique_ids": 16377,
+      "original_duplicate_id_occurrences": 17,
+      "identical_duplicate_ids": [
+        "8uqy0oIkm2E",
+        "9yZHwnh6lAE",
+        "C0xiOGhS_js",
+        "IJWR1disUlA",
+        "K2L6xXJrpq4",
+        "PYJYiBlto5M",
+        "Q-_6HMf1M_Q",
+        "_8ablljnDBw",
+        "axaOsCgpupk",
+        "t_gxXV3s04I",
+        "u51lBpnxPMk"
+      ],
+      "identical_duplicates_removed_after_exclusions": {
+        "8uqy0oIkm2E": 1,
+        "9yZHwnh6lAE": 1,
+        "C0xiOGhS_js": 1,
+        "IJWR1disUlA": 1,
+        "K2L6xXJrpq4": 1,
+        "PYJYiBlto5M": 1,
+        "Q-_6HMf1M_Q": 1,
+        "_8ablljnDBw": 1,
+        "axaOsCgpupk": 1,
+        "t_gxXV3s04I": 1,
+        "u51lBpnxPMk": 1
+      },
+      "identical_duplicate_rows_removed_after_exclusions": 11,
+      "conflict_ids": [
+        "0B2TUJyCnDQ",
+        "SDnnDZgxYiI",
+        "eXZebRu9VSU",
+        "hporRfjFISo",
+        "lZFhabAf7vg",
+        "th4-Lxdtdqo"
+      ],
+      "conflict_variants": {
+        "0B2TUJyCnDQ": [
+          "2128766232977a85d409d074c026640fbddf8a43f4b4bf824b5af0e8e899f467",
+          "6ecbf4da6ca010a3de99526d419630c743733c78d6a075dcb10a8a0b33a3e601"
+        ],
+        "SDnnDZgxYiI": [
+          "297fabd7103a668414e4a0f65d179160932d58f771f1d9be4536009a10cfb6ca",
+          "c01ddcec976088699747b3bb7410505d1383448b4cd68bb233926e032044987c"
+        ],
+        "eXZebRu9VSU": [
+          "0532031a01a522404b84f5dcc4fd7725302fe2eaed12a25a3d9c900112a9cf1e",
+          "41a1719ed0a113d281b91b491c8c864629f3293719b58614e7d0c34f019435e4"
+        ],
+        "hporRfjFISo": [
+          "611d01caa01668b77c0dd6e1cc5f39d213de9f9beffcc2b1cac0c0d5a5b9d4d9",
+          "8e5aaa87923abcbc56e5e73b2b1947267432d6f9dab38995cf4d12f70f271f71"
+        ],
+        "lZFhabAf7vg": [
+          "1da4bd1e21c7ac1b4bb46ca66b91ab932ac182a1df4eee9af3883fb9c7326432",
+          "d0ebaff0f45e508d121cd0f60890acc5385dbb0b1e67b0efda72208ac1710285"
+        ],
+        "th4-Lxdtdqo": [
+          "85d70b5f46a28e41bc479151d78e086a2626eec543d892a901d1ebacc71ecd03",
+          "b4d6454d5431301e2d569559550b5d526ebdc6de5eb6f99824e65f4e1ced5f11"
+        ]
+      },
+      "quarantined_conflict_rows": 12,
+      "validation_priority_excluded_ids": [
+        "VKmOXCEq-6A",
+        "nP-nMZpLM1A",
+        "xZ3k7Fd6_eU",
+        "z6qATR0VLnk"
+      ],
+      "validation_priority_excluded_rows": 4,
+      "conflict_rows_also_excluded_by_validation_priority": 0,
+      "exclusive_removed_counts": {
+        "validation_priority": 4,
+        "conflict_not_already_excluded": 12,
+        "identical_duplicates_after_exclusions": 11
+      }
+    },
+    "validation": {
+      "original_rows": 1447,
+      "original_unique_ids": 1446,
+      "resolved_rows": 1446,
+      "resolved_unique_ids": 1446,
+      "original_duplicate_id_occurrences": 1,
+      "identical_duplicate_ids": [
+        "xZ3k7Fd6_eU"
+      ],
+      "identical_duplicates_removed_after_exclusions": {
+        "xZ3k7Fd6_eU": 1
+      },
+      "identical_duplicate_rows_removed_after_exclusions": 1,
+      "conflict_ids": [],
+      "conflict_variants": {},
+      "quarantined_conflict_rows": 0,
+      "validation_priority_excluded_ids": [],
+      "validation_priority_excluded_rows": 0,
+      "conflict_rows_also_excluded_by_validation_priority": 0,
+      "exclusive_removed_counts": {
+        "validation_priority": 0,
+        "conflict_not_already_excluded": 0,
+        "identical_duplicates_after_exclusions": 1
+      }
+    }
+  },
+  "postconditions": {
+    "train_nonempty": true,
+    "validation_nonempty": true,
+    "train_ids_unique": true,
+    "validation_ids_unique": true,
+    "no_train_validation_overlap": true,
+    "no_original_validation_id_in_train": true,
+    "partitions_unchanged": true,
+    "test_isolation_inherited_from_verified_source_subsets": true
+  },
+  "resolved_integrity_gate_passed": true,
+  "smoke_manifests": {
+    "train": [
+      {
+        "video_id": "Bfq3OAGJvTQ",
+        "sentences": 42
+      },
+      {
+        "video_id": "WPetd0bRPKI",
+        "sentences": 113
+      },
+      {
+        "video_id": "56WUlMEeAuA",
+        "sentences": 430
+      }
+    ],
+    "validation": [
+      {
+        "video_id": "8ChvfpMhOns",
+        "sentences": 44
+      },
+      {
+        "video_id": "Bjwc5L5ctNc",
+        "sentences": 115
+      },
+      {
+        "video_id": "D88FNWtMqAM",
+        "sentences": 455
+      }
+    ]
+  },
+  "output_files_sha256": {
+    "excluded_train_validation_ids.jsonl": "5f249032544e2afc96996a1ee2c5cefce30501282b77aa9ec177eebff7ab8134",
+    "quarantine_train.jsonl": "f3a5c1ddaf928d65fd7b22b01cb3911477c0b1754a6a4559f0e0b3d63c40d0e8",
+    "quarantine_validation.jsonl": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "smoke_train.jsonl": "4a8e4b5b843d7f14c4ffb654965e80e89d3239333c7658d7df2910067946f232",
+    "smoke_validation.jsonl": "28749392ce21f83b975fb92712a330cab54a419eff5bb0c1983b19d79adc7760",
+    "train.jsonl": "5822a9411379618e8e45ec5ce2a036895f3896b32d601779821a47ba27a556a8",
+    "validation.jsonl": "317ed04f77640890677fedf9b129b367135a8f6387bb9ca45b852f2888489cee"
+  }
+}

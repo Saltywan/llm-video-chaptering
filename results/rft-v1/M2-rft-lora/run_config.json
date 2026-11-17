@@ -1,0 +1,43 @@
+{
+  "alias": "M2",
+  "status": "running",
+  "batch_tokens": 0,
+  "max_batch_windows": 0,
+  "planned_batches": 134,
+  "planned_optimizer_steps": 17,
+  "gradient_checkpointing": true,
+  "target_modules": [
+    "q_proj",
+    "k_proj",
+    "v_proj",
+    "o_proj"
+  ],
+  "warmup_steps": 3,
+  "lr_schedule": "cosine",
+  "selective_logits": false,
+  "purpose": "one pass over all prepared windows",
+  "final_context": "rft_self_samples_v1",
+  "thoughts_sha256": null,
+  "windows_dropped_without_usable_thought": null,
+  "max_sequence_tokens": null,
+  "grad_accum": 8,
+  "checkpoint_every": 100,
+  "available_windows": 134,
+  "planned_steps": 134,
+  "available_training_videos": 1000,
+  "planned_training_videos": 132,
+  "rank": 16,
+  "lora_alpha": 32,
+  "lora_dropout": 0.05,
+  "learning_rate": 0.0002,
+  "seed": 393,
+  "gemma_final_context": "direct_v1",
+  "windows_sha256": "50268cddc9228eb93492768630b61f1a382cd8ec4edd1c73a6dd560fa1027f0f",
+  "packages": {
+    "torch": "2.14.0",
+    "transformers": "5.23.0",
+    "peft": "0.21.3",
+    "flash-linear-attention": "0.6.0",
+    "causal-conv1d": "1.7.0"
+  }
+}

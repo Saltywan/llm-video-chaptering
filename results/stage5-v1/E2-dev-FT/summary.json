@@ -1,0 +1,44 @@
+{
+  "alias": "E2",
+  "backend": "hf_batched_greedy_v1",
+  "requested_videos": 200,
+  "requested_windows": 270,
+  "status_counts": {
+    "ok": 199,
+    "truncated": 1
+  },
+  "window_status_counts": {
+    "ok": 269,
+    "truncated": 1
+  },
+  "tiers": [
+    {
+      "cap": 384,
+      "windows": 270,
+      "batches": 9,
+      "carried_to_next": 1,
+      "seconds": 245.67313906014897
+    },
+    {
+      "cap": 1536,
+      "windows": 1,
+      "batches": 1,
+      "carried_to_next": 1,
+      "seconds": 137.56426358385943
+    },
+    {
+      "cap": 4096,
+      "windows": 1,
+      "batches": 1,
+      "carried_to_next": 0,
+      "seconds": 355.2698928960599
+    }
+  ],
+  "completion_tokens": 31393,
+  "load_seconds": 15.849722720915452,
+  "generation_seconds": 738.5072955400683,
+  "kept_output_tokens_per_second": 42.50872021114211,
+  "total_seconds": 756.9936188778374,
+  "peak_allocated_bytes": 106932292096,
+  "peak_reserved_bytes": 159897354240
+}

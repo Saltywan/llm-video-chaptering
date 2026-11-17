@@ -1,0 +1,24 @@
+{
+  "recipe": "rft_self_samples_v1",
+  "min_f1": 0.5,
+  "manifest_windows": 1306,
+  "samples_read": 5224,
+  "kept_windows": 599,
+  "drop_counts": {
+    "window_best_below_min_f1": 707,
+    "sample_not_ok": 11
+  },
+  "mean_valid_sample_f1": 0.3503814370870974,
+  "mean_kept_f1": 0.7051740700374955,
+  "sample_files": [
+    "artifacts/rft-v1/samples/M1-seed1001/windows.jsonl",
+    "artifacts/rft-v1/samples/M1-seed2002/windows.jsonl",
+    "artifacts/rft-v1/samples/M1-seed3003/windows.jsonl",
+    "artifacts/rft-v1/samples/M1-seed4004/windows.jsonl",
+    "artifacts/rft-v2/samples/M1-seed1001/ZS/windows.jsonl",
+    "artifacts/rft-v2/samples/M1-seed2002/ZS/windows.jsonl",
+    "artifacts/rft-v2/samples/M1-seed3003/ZS/windows.jsonl",
+    "artifacts/rft-v2/samples/M1-seed4004/ZS/windows.jsonl"
+  ],
+  "output_sha256": "80d2a54c4bfb528748a9e29bf735bf1b7c651745f29973a26d75d081b6875382"
+}

@@ -1,0 +1,13 @@
+{
+  "schema_version": 1,
+  "active_system": "C",
+  "gpu_uuid": "GPU-05f1cfd1-0219-e850-913d-159b6ed72d60",
+  "models": {
+    "M1": {"model_id": "Qwen/Qwen3.5-9B", "revision": "c202236235762e1c871ad0ccb60c8ee5ba337b9a", "architecture": "causal", "enable_thinking": true, "endpoint": "${CHAPTERING_ENDPOINT_URL}", "api_key_env": "CHAPTERING_QWEN_API_KEY"},
+    "M2": {"model_id": "google/gemma-4-12B-it", "revision": "43c9d014b231474fa7212dbb48a762566c2b255d", "architecture": "causal", "enable_thinking": true, "endpoint": "${CHAPTERING_ENDPOINT_URL}", "api_key_env": "CHAPTERING_GEMMA_API_KEY"},
+    "E1": {"model_id": "google/t5gemma-9b-2b-ul2-it", "revision": "99b9b9da34b8e66e2290c5c6d17306231c5b2566", "architecture": "seq2seq", "enable_thinking": null},
+    "E2": {"model_id": "google/t5gemma-2b-2b-ul2-it", "revision": "6a196a58ce2786cd139a1217a85d1f7b9984e330", "architecture": "seq2seq", "enable_thinking": null}
+  },
+  "smoke": {"max_tokens": 2048, "temperature": 0.6, "top_p": 0.95, "seed": 393, "repair_retries": 0},
+  "status": "smoke configuration only; selected checkpoint revisions pinned, final inference/training settings remain gated"
+}

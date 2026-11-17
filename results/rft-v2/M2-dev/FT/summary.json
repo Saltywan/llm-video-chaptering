@@ -1,0 +1,16 @@
+{
+  "alias": "M2",
+  "arm": "FT",
+  "requested_videos": 200,
+  "requested_windows": 270,
+  "status_counts": {
+    "ok": 200
+  },
+  "generation_seconds": 651.689614636125,
+  "completion_tokens": 1494728,
+  "output_tokens_per_second": 2293.6194876062136,
+  "timing_policy": "sum of batch elapsed times; concurrent latencies are not summed",
+  "configured_max_num_seqs": 100,
+  "batch_size": 100,
+  "submitted_windows": 270
+}

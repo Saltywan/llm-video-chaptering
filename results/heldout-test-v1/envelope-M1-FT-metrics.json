@@ -1,0 +1,144 @@
+{
+ "additional_metrics": {
+  "boundary_similarity": {
+   "failed_request_score": 0.0,
+   "macro_all_requests": 0.365850629211216,
+   "metadata": {
+    "boundary_format": "mass",
+    "implementation": "segeval",
+    "n_t": 2,
+    "name": "Boundary Similarity",
+    "one_minus": false,
+    "package_version": "2.0.11",
+    "return_parts": false,
+    "unit": "sentences"
+   }
+  },
+  "titles": {
+   "failed_videos": 65,
+   "matched_chapters": 8592,
+   "matching_policy": {
+    "boundary_tolerance": 2,
+    "span_iou_threshold": 0.5,
+    "structural_window": "reference_half_mean_half_up_N_minus_k",
+    "version": 1
+   },
+   "predicted_chapters_successful_requests": 13438,
+   "prediction_coverage_successful_requests": 0.6393808602470605,
+   "reference_chapters_all_requests": 13296,
+   "reference_coverage_all_requests": 0.6462093862815884,
+   "requested_videos": 1448,
+   "rouge_l": {
+    "concatenated_document_macro_all_requests": {
+     "f1": 0.27665028749267506,
+     "precision": 0.2990049873064189,
+     "recall": 0.3089888068311481
+    },
+    "concatenation_separator": "\n",
+    "failed_document_score": 0.0,
+    "matched_only_mean": {
+     "f1": 0.3551980606096226,
+     "precision": 0.37369052536879516,
+     "recall": 0.3869620499801755
+    },
+    "metadata": {
+     "implementation": "rouge-score",
+     "name": "rougeL",
+     "package_version": "0.1.2",
+     "scale": "0_to_1",
+     "use_stemmer": false
+    },
+    "reference_chapter_mean_with_unmatched_zero": {
+     "f1": 0.2295323207549547,
+     "precision": 0.24148232505781347,
+     "recall": 0.2500585088319546
+    }
+   },
+   "semantic": {
+    "matched_only_mean": {
+     "f1": 0.903461758435827,
+     "precision": 0.9025877291541303,
+     "recall": 0.9050011476449793
+    },
+    "metadata": {
+     "batch_size": 16,
+     "device": "cpu",
+     "idf": false,
+     "implementation": "bert-score",
+     "local_files_only": true,
+     "model_id": "FacebookAI/roberta-large",
+     "name": "BERTScore",
+     "num_layers": 17,
+     "package_version": "0.3.13",
+     "rescale_with_baseline": false,
+     "revision": "722cf37b1afa9454edce342e7895e588b6ff1d59",
+     "scope": "span-matched individual titles; no concatenated-document semantic score",
+     "use_fast_tokenizer": false
+    },
+    "reference_chapter_mean_with_unmatched_zero": {
+     "f1": 0.5838254684477004,
+     "precision": 0.5832606625219832,
+     "recall": 0.5848202362037953
+    },
+    "scope": "span-matched individual chapter titles",
+    "zero_fill_is_reporting_convention_not_semantic_lower_bound": true
+   }
+  }
+ },
+ "canonical": {
+  "aggregate": {
+   "all_requests_micro": null,
+   "failed_videos": 65,
+   "failure_rate": 0.04488950276243094,
+   "macro_exact_f1": 0.37662631173055655,
+   "macro_pk": 0.31322127555086376,
+   "macro_tolerant_f1": 0.5897973720633928,
+   "macro_window_diff": 0.34474277709949086,
+   "metric_policy": {
+    "boundary_tolerance": 2,
+    "span_iou_threshold": 0.5,
+    "structural_window": "reference_half_mean_half_up_N_minus_k",
+    "version": 1
+   },
+   "requested_videos": 1448,
+   "status_counts": {
+    "invalid": 60,
+    "ok": 1383,
+    "truncated": 5
+   },
+   "successful_only_micro": {
+    "exact": {
+     "f1": 0.4118484025352477,
+     "fn": 6362,
+     "fp": 7279,
+     "precision": 0.39618415595188716,
+     "recall": 0.42880229843778056,
+     "tp": 4776
+    },
+    "excluded_failures": 65,
+    "tolerant": {
+     "f1": 0.6269995257189669,
+     "fn": 3867,
+     "fp": 4784,
+     "precision": 0.6031522189962671,
+     "recall": 0.6528101993176513,
+     "tp": 7271
+    },
+    "videos": 1383
+   },
+   "successful_videos": 1383,
+   "title_span_alignment": {
+    "matched_chapters": 8592,
+    "predicted_chapters_successful_requests": 13438,
+    "prediction_coverage_successful_requests": 0.6393808602470605,
+    "reference_chapters_all_requests": 13296,
+    "reference_coverage_all_requests": 0.6462093862815884
+   }
+  }
+ },
+ "input_files": {
+  "left_predictions": "artifacts/heldout-test-v1/envelope-M1-FT.predictions.jsonl",
+  "references": "artifacts/windows/test-v1/test_records.jsonl",
+  "right_predictions": null
+ }
+}

@@ -1,0 +1,199 @@
+{
+  "schema_version": 1,
+  "dataset": "retkowski/ytseg",
+  "config": "text",
+  "revision": "4ee1c1fccc5a9e118ff0918f3df1e61aadca8970",
+  "label_semantics": "internal_chapter_start_sentence_index",
+  "alignment_policy": "all rows: binary starts equal marked-transcript starts, titles and sentences align",
+  "partial_train_validation": false,
+  "test_policy": "video_id column only; no canonical test examples or test predictions",
+  "smoke_policy": "fixed sentence-count quantiles 0.1, 0.5, 0.9; ties ordered by video_id; not effectiveness sample",
+  "splits": {
+    "train": {
+      "rows_seen": 16404,
+      "valid_rows": 16404,
+      "invalid_rows": 0,
+      "unique_ids": 16387,
+      "duplicate_ids": [
+        "u51lBpnxPMk",
+        "SDnnDZgxYiI",
+        "0B2TUJyCnDQ",
+        "eXZebRu9VSU",
+        "K2L6xXJrpq4",
+        "C0xiOGhS_js",
+        "Q-_6HMf1M_Q",
+        "PYJYiBlto5M",
+        "lZFhabAf7vg",
+        "8uqy0oIkm2E",
+        "_8ablljnDBw",
+        "hporRfjFISo",
+        "IJWR1disUlA",
+        "th4-Lxdtdqo",
+        "axaOsCgpupk",
+        "t_gxXV3s04I",
+        "9yZHwnh6lAE"
+      ],
+      "sentence_counts": {
+        "count": 16404,
+        "total": 3211073,
+        "mean": 195.74939039258717,
+        "quantiles": {
+          "0": 1,
+          "0.1": 42,
+          "0.5": 113,
+          "0.9": 432,
+          "0.95": 654,
+          "0.99": 1355,
+          "1": 6498
+        }
+      },
+      "chapter_counts": {
+        "count": 16404,
+        "total": 149366,
+        "mean": 9.105462082418923,
+        "quantiles": {
+          "0": 1,
+          "0.1": 4,
+          "0.5": 8,
+          "0.9": 14,
+          "0.95": 18,
+          "0.99": 31,
+          "1": 57
+        }
+      },
+      "title_word_counts": {
+        "count": 149366,
+        "total": 573320,
+        "mean": 3.8383567880240483,
+        "quantiles": {
+          "0": 1,
+          "0.1": 1,
+          "0.5": 3,
+          "0.9": 7,
+          "0.95": 9,
+          "0.99": 13,
+          "1": 121
+        }
+      },
+      "smoke": [
+        {
+          "video_id": "Bfq3OAGJvTQ",
+          "sentences": 42
+        },
+        {
+          "video_id": "aGYoVy2Ear0",
+          "sentences": 113
+        },
+        {
+          "video_id": "9Gz-MyUGF7k",
+          "sentences": 432
+        }
+      ],
+      "tokenizers": {}
+    },
+    "validation": {
+      "rows_seen": 1447,
+      "valid_rows": 1447,
+      "invalid_rows": 0,
+      "unique_ids": 1446,
+      "duplicate_ids": [
+        "xZ3k7Fd6_eU"
+      ],
+      "sentence_counts": {
+        "count": 1447,
+        "total": 286753,
+        "mean": 198.1706979958535,
+        "quantiles": {
+          "0": 6,
+          "0.1": 44,
+          "0.5": 115,
+          "0.9": 455,
+          "0.95": 665,
+          "0.99": 1463,
+          "1": 1895
+        }
+      },
+      "chapter_counts": {
+        "count": 1447,
+        "total": 13371,
+        "mean": 9.240497581202488,
+        "quantiles": {
+          "0": 2,
+          "0.1": 4,
+          "0.5": 8,
+          "0.9": 15,
+          "0.95": 18,
+          "0.99": 33,
+          "1": 53
+        }
+      },
+      "title_word_counts": {
+        "count": 13371,
+        "total": 50921,
+        "mean": 3.8083165058709145,
+        "quantiles": {
+          "0": 1,
+          "0.1": 1,
+          "0.5": 3,
+          "0.9": 7,
+          "0.95": 9,
+          "0.99": 13,
+          "1": 84
+        }
+      },
+      "smoke": [
+        {
+          "video_id": "8ChvfpMhOns",
+          "sentences": 44
+        },
+        {
+          "video_id": "Bjwc5L5ctNc",
+          "sentences": 115
+        },
+        {
+          "video_id": "D88FNWtMqAM",
+          "sentences": 455
+        }
+      ],
+      "tokenizers": {}
+    },
+    "test": {
+      "rows_seen": 1448,
+      "unique_ids": 1448,
+      "duplicate_ids": [],
+      "content_audited": false
+    }
+  },
+  "invalid_rows": 0,
+  "tokenizer_sources": {},
+  "tokenizer_measure": "indexed transcript without instruction/chat template; outline JSON without template",
+  "split_overlaps": {
+    "train__validation": {
+      "count": 4,
+      "video_ids": [
+        "VKmOXCEq-6A",
+        "nP-nMZpLM1A",
+        "xZ3k7Fd6_eU",
+        "z6qATR0VLnk"
+      ]
+    },
+    "train__test": {
+      "count": 0,
+      "video_ids": []
+    },
+    "validation__test": {
+      "count": 0,
+      "video_ids": []
+    }
+  },
+  "error_counts": {},
+  "passed": false,
+  "full_integrity_gate_passed": false,
+  "files_sha256": {
+    "smoke_validation.jsonl": "28749392ce21f83b975fb92712a330cab54a419eff5bb0c1983b19d79adc7760",
+    "invalid_rows.jsonl": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "train.jsonl": "a1b4b621ce1b28321a08874da4ea368994b9d39c90dfb5fcae8d914c8b3e9d94",
+    "validation.jsonl": "9f3e192916dceb7b7cdda97ffdd3b9bce7a3bbadc1e6216bdd33cc20759d97a2",
+    "smoke_train.jsonl": "0bf65f46749f7e2bafbc5bef46048672f105aa7375f56775cc53c4bbdd3e643e"
+  }
+}

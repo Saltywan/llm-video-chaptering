@@ -1,0 +1,17 @@
+{
+  "alias": "M2",
+  "arm": "ZS",
+  "requested_videos": 767,
+  "requested_windows": 1006,
+  "status_counts": {
+    "ok": 766,
+    "invalid": 1
+  },
+  "generation_seconds": 902.2122441821266,
+  "completion_tokens": 5599673,
+  "output_tokens_per_second": 6206.602754628115,
+  "timing_policy": "sum of batch elapsed times; concurrent latencies are not summed",
+  "configured_max_num_seqs": 256,
+  "batch_size": 1006,
+  "submitted_windows": 1006
+}

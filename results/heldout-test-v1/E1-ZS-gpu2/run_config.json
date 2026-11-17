@@ -1,0 +1,26 @@
+{
+  "alias": "E1",
+  "windows": "artifacts/windows/test-v1/test_windows.jsonl",
+  "output": "artifacts/heldout-test-v1/E1-ZS-gpu2",
+  "adapter": null,
+  "attention": null,
+  "max_new_tokens": 4096,
+  "tiers": [
+    384,
+    1536,
+    4096
+  ],
+  "max_batch": 64,
+  "square_budget": 536870912,
+  "max_videos": null,
+  "purpose": "held-out test; frozen configuration configs/frozen_test.json; run once (physical GPU2)",
+  "decoding": "greedy",
+  "window_manifest_sha256": "485ec672bd4c4a18320005805d88c0551dcfcaa19a2ea12d88151b402738f808",
+  "requested_videos": 1448,
+  "requested_windows": 1905,
+  "packages": {
+    "torch": "2.14.0",
+    "transformers": "5.23.0",
+    "peft": "0.21.3"
+  }
+}

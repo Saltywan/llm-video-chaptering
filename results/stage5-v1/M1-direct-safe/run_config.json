@@ -1,0 +1,41 @@
+{
+  "alias": "M1",
+  "status": "running",
+  "batch_tokens": 0,
+  "planned_batches": 1306,
+  "planned_optimizer_steps": 164,
+  "gradient_checkpointing": true,
+  "target_modules": [
+    "q_proj",
+    "k_proj",
+    "v_proj",
+    "o_proj"
+  ],
+  "warmup_steps": 10,
+  "lr_schedule": "cosine",
+  "purpose": "one pass over all prepared windows",
+  "final_context": "native_template_v1",
+  "thoughts_sha256": null,
+  "windows_dropped_without_usable_thought": null,
+  "max_sequence_tokens": null,
+  "grad_accum": 8,
+  "checkpoint_every": 100,
+  "available_windows": 1306,
+  "planned_steps": 1306,
+  "available_training_videos": 1000,
+  "planned_training_videos": 1000,
+  "rank": 16,
+  "lora_alpha": 32,
+  "lora_dropout": 0.05,
+  "learning_rate": 0.0002,
+  "seed": 393,
+  "gemma_final_context": null,
+  "windows_sha256": "0ec7bcb29153f0da487c2d9b2c2d022d4cce0382c62b9d4b23ec7f964ff9ad2f",
+  "packages": {
+    "torch": "2.14.0",
+    "transformers": "5.23.0",
+    "peft": "0.21.3",
+    "flash-linear-attention": "0.6.0",
+    "causal-conv1d": "1.7.0"
+  }
+}
