@@ -127,6 +127,35 @@ Endpoint URLs in `configs/models.json` are placeholders (`${CHAPTERING_ENDPOINT_
 * **LoRA adapter weights:** kept out of git. The best two are on Hugging Face (see [Released models](#released-models)).
 * **Full run outputs (~2.6 GB):** transcripts and windows, raw generations including thinking, and per-video metric details. Per-video scores can be recomputed from `results/**/predictions.jsonl` and the rebuilt records.
 
+## References
+
+BibTeX for every entry below is in [`references.bib`](references.bib).
+
+**Benchmark and the work it builds on**
+* Retkowski & Waibel (2024). *From Text Segmentation to Smart Chaptering: A Novel Benchmark for Structuring Video Transcriptions.* EACL 2024. [ACL Anthology](https://aclanthology.org/2024.eacl-long.25/). This paper introduced the YTSeg dataset and MiniSeg, the main baseline compared against here.
+* Retkowski, Züfle, Nguyen, Niehues & Waibel (2026). *Beyond Transcripts: A Renewed Perspective on Audio Chaptering.* ACL 2026. [ACL Anthology](https://aclanthology.org/2026.acl-long.396/). It adds audio and ASR annotations to YTSeg, introduces the time-grid evaluation protocols, and presents AudioSeg.
+
+**Related segmentation methods**
+* Li, Shen, Jeoung, Chen, Li, Zhu, Wang, Ioannidis & Rangwala (2026). *BoundRL: Efficient Token-level Structured Text Segmentation through Reinforced Boundary Generation.* Findings of ACL 2026. [ACL Anthology](https://aclanthology.org/2026.findings-acl.1733/).
+  * Its idea is close to ours: generate only segment boundaries and labels, not the text.
+  * It trains with reinforcement learning from verifiable rewards. Our RFT follow-up is a simpler, offline relative.
+* Lukasik, Dadachev, Papineni & Simões (2020). *Text Segmentation by Cross Segment Attention.* EMNLP 2020. [ACL Anthology](https://aclanthology.org/2020.emnlp-main.380/).
+
+**Models and training**
+* Zhang et al. (2025). *Encoder-Decoder Gemma: Improving the Quality-Efficiency Trade-Off via Adaptation.* [arXiv:2504.06225](https://arxiv.org/abs/2504.06225). This is T5Gemma, the E1/E2 backbones.
+* The other two backbones are documented in their model cards: [Qwen3.5-9B](https://huggingface.co/Qwen/Qwen3.5-9B) and [Gemma 4 12B](https://huggingface.co/google/gemma-4-12B-it).
+* Hu et al. (2022). *LoRA: Low-Rank Adaptation of Large Language Models.* ICLR 2022. [arXiv:2106.09685](https://arxiv.org/abs/2106.09685).
+* Zelikman, Wu, Mu & Goodman (2022). *STaR: Bootstrapping Reasoning With Reasoning.* NeurIPS 2022. [arXiv:2203.14465](https://arxiv.org/abs/2203.14465). This is the idea of fine-tuning on a model's own successful reasoning.
+* Yuan et al. (2023). *Scaling Relationship on Learning Mathematical Reasoning with Large Language Models.* [arXiv:2308.01825](https://arxiv.org/abs/2308.01825). This paper defines rejection-sampling fine-tuning (RFT).
+* Kwon et al. (2023). *Efficient Memory Management for Large Language Model Serving with PagedAttention.* SOSP 2023. [arXiv:2309.06180](https://arxiv.org/abs/2309.06180). This is vLLM, used for M1/M2 inference.
+
+**Evaluation metrics**
+* Beeferman, Berger & Lafferty (1999). *Statistical Models for Text Segmentation.* Machine Learning 34. This paper introduced Pk.
+* Pevzner & Hearst (2002). *A Critique and Improvement of an Evaluation Metric for Text Segmentation.* Computational Linguistics 28(1). [ACL Anthology](https://aclanthology.org/J02-1002/). This paper introduced WindowDiff.
+* Fournier (2013). *Evaluating Text Segmentation using Boundary Edit Distance.* ACL 2013. [ACL Anthology](https://aclanthology.org/P13-1167/). This paper introduced Boundary Similarity.
+* Lin (2004). *ROUGE: A Package for Automatic Evaluation of Summaries.* [ACL Anthology](https://aclanthology.org/W04-1013/).
+* Zhang et al. (2020). *BERTScore: Evaluating Text Generation with BERT.* ICLR 2020. [arXiv:1904.09675](https://arxiv.org/abs/1904.09675). BERTScore here uses RoBERTa-large: Liu et al. (2019), [arXiv:1907.11692](https://arxiv.org/abs/1907.11692).
+
 ## Licenses and attribution
 
 * **Code:** [MIT](LICENSE). This covers `src/`, `scripts/`, `tests/`, `configs/` and the code cells of the notebooks.
