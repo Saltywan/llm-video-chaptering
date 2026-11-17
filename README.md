@@ -107,6 +107,37 @@ results/          small run outputs: predictions, summaries, run configs, aggreg
 reports/          compiled results (Markdown, JSON, HTML) with a method appendix
 ```
 
+## Hardware and compute
+
+Every job ran on **one NVIDIA B200 (179 GiB HBM3e)**. Two B200s were used in parallel for some stages, with one job per GPU. The software was PyTorch 2.14, Transformers 5.23, PEFT 0.21 and vLLM 0.33, on CUDA 13.1 driver 590.44.
+
+**Training.** One epoch in bf16, one window per forward pass, gradient accumulation 8, with gradient checkpointing.
+
+| Run | Training windows | Time | Peak allocated | Peak reserved |
+|---|---|---|---|---|
+| E1 T5Gemma 9B-2B, LoRA | 1,306 | 47 min | 44.7 GiB | 149.7 GiB |
+| E2 T5Gemma 2B-2B, LoRA | 1,306 | 29 min | 21.3 GiB | 57.4 GiB |
+| M1 Qwen3.5-9B, LoRA | 1,306 | 17 min | 44.0 GiB | 128.9 GiB |
+| M2 Gemma 4 12B, LoRA | 1,306 | 41 min | 55.8 GiB | 168.6 GiB |
+| M1, RFT v2 | 599 | 12 min | 86.7 GiB | 174.2 GiB |
+| M2, RFT v2 | 573 | 35 min | 105.2 GiB | 163.3 GiB |
+
+* **Allocated vs reserved.** *Allocated* is the peak of live tensors, which is the real requirement. *Reserved* adds PyTorch's caching allocator, which grows into free memory when windows vary in length.
+* **Why RFT needs more.** RFT trains on the model's own reasoning: up to an 8k-token prompt plus up to 32k tokens of thinking, so it needs more memory.
+
+**Test inference** (1,448 videos, 1,905 windows; generation time, excluding model load):
+
+| Model | Engine | Zero-shot | LoRA | GPU memory |
+|---|---|---|---|---|
+| E1 T5Gemma 9B-2B | Transformers, batched greedy | 339 min | 62 min | 113 GiB peak allocated |
+| E2 T5Gemma 2B-2B | Transformers, batched greedy | 101 min | 30 min | 101 GiB peak allocated |
+| M1 Qwen3.5-9B | vLLM, 100 concurrent sequences | 38 min | 50 min | 70% pre-allocated (≈125 GiB: weights + KV cache) |
+| M2 Gemma 4 12B | vLLM, 100 concurrent sequences | 57 min | 6 min | 70% pre-allocated (≈125 GiB) |
+
+* **Memory figures reflect our throughput settings.** The encoder-decoders were batched to fill a fixed token budget, and vLLM reserves a fixed share of the GPU up front.
+* **One window needs far less.** Single-window pilot inference peaked at **13 GiB** (E2), **27 GiB** (E1) and **18 GiB** (M1) allocated.
+* **Why some runs are much faster.** E1 zero-shot is slow because most of its outputs run to the 4,096-token cap. M2 LoRA is fast because that adapter stopped producing thinking tokens.
+
 ## Reproducing
 
 1. **Environment:**
