@@ -30,7 +30,20 @@ Caveats:
 * **Metric details.** The published paper does not spell out every detail: micro vs macro averaging, and the Pk window. The comparison is therefore indicative, not a controlled re-evaluation.
 * **Model size.** Our models are much larger than MiniSeg, and they also generate the titles.
 * **Titles are not comparable.** The paper scores titles given the gold segments (BART: ROUGE-L 42.45). Our title scores come from end-to-end predicted chapters.
-* **Different protocol in later work.** *Beyond Transcripts* (Retkowski et al., 2026) evaluates on a 6-second time grid, so its F1 values (≈40–46) cannot be compared directly.
+* **Different protocol in later work.** The 2026 follow-up, [*Beyond Transcripts*](https://aclanthology.org/2026.acl-long.396/) (Retkowski et al., ACL 2026), scores on a 6-second time grid, so its numbers can't be compared with ours directly. Its results are listed below.
+
+**2026 follow-up results (F1@6s, B@6s, Pk@6s on a 6-second time grid):**
+
+| System (Retkowski et al., 2026) | Input | F1@6s | B@6s | Pk@6s ↓ |
+|---|---|---|---|---|
+| AudioSeg, Whisper Large encoder (best overall) | audio | 45.52 | 36.17 | 28.89 |
+| Qwen3-Omni, in-context learning (videos < 30 min only) | audio + text | 41.30 | 35.22 | 33.00 |
+| MiniSeg + acoustic features | text + audio features | 40.30 | 33.48 | 30.35 |
+| MiniSeg, trained on reference + ASR transcripts (best text-only) | text | 40.01 | 33.24 | 29.84 |
+| LLaMA 3.1 8B, zero-shot with constrained decoding | text | 25.92 | 20.69 | 39.98 |
+
+* **Why there's no row for us.** Placing our predictions on that grid needs sentence-level timestamps. YTSeg provides chapter timestamps only, and the paper gets sentence times by forcing an alignment against the audio, which we did not do.
+* **No YTSeg v2.** The 2026 paper adds ASR transcripts, duration and speaker annotations, and audio to the same dataset repository. The text and labels used here (revision `4ee1c1f`) are that current version.
 
 ## Preliminary: rejection-sampling fine-tuning (dev only)
 
