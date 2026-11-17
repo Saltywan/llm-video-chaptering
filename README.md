@@ -11,6 +11,27 @@ This project segments a YouTube transcript into chapters and gives each chapter 
 
 The test set has 1,448 videos, each configuration ran once after the freeze in `configs/frozen_test.json`, and every difference comes with a paired bootstrap interval. The LoRA adapters are pilot-scale: 1,000 training videos, one pass.
 
+## Comparison with published results
+
+The test split here is the official YTSeg test split (1,448 videos), and boundaries are counted at sentence level on the dataset's own sentences. The original YTSeg paper uses that same setup. It reports sentence-level boundary precision, recall and F1, which we take to be pooled over all test boundaries (micro).
+
+The headline numbers above are **macro** averages over videos, so the table below recomputes the same predictions as **micro** scores. Every gold internal boundary counts; failed videos contribute only misses.
+
+| System | Approach | P | R | F1 | Joint titles |
+|---|---|---|---|---|---|
+| MiniSeg, Wiki-727K → YTSeg (Retkowski & Waibel, 2024; best published) | supervised segmentation model | 48.30 | 43.56 | 45.81 | no |
+| MiniSeg, YTSeg only (same paper) | supervised segmentation model | 45.44 | 41.48 | 43.37 | no |
+| **E2 T5Gemma 2B-2B + LoRA (ours)** | generative, JSON outline | **53.15** | **50.87** | **51.99** | yes |
+| E1 T5Gemma 9B-2B + LoRA (ours) | generative, JSON outline | 52.01 | 48.89 | 50.40 | yes |
+| M2 Gemma 4 12B zero-shot (ours) | generative, native thinking | 35.18 | 54.03 | 42.61 | yes |
+| M1 Qwen3.5-9B zero-shot (ours) | generative, native thinking | 35.32 | 45.07 | 39.61 | yes |
+
+Caveats:
+* **Metric details.** The published paper does not spell out every detail: micro vs macro averaging, and the Pk window. The comparison is therefore indicative, not a controlled re-evaluation.
+* **Model size.** Our models are much larger than MiniSeg, and they also generate the titles.
+* **Titles are not comparable.** The paper scores titles given the gold segments (BART: ROUGE-L 42.45). Our title scores come from end-to-end predicted chapters.
+* **Different protocol in later work.** *Beyond Transcripts* (Retkowski et al., 2026) evaluates on a 6-second time grid, so its F1 values (≈40–46) cannot be compared directly.
+
 ## Preliminary: rejection-sampling fine-tuning (dev only)
 
 Answer-only LoRA made the two reasoning models skip most of their thinking and score lower. As a follow-up, we tried **rejection-sampling fine-tuning (RFT)**:
@@ -86,6 +107,7 @@ Endpoint URLs in `configs/models.json` are placeholders (`${CHAPTERING_ENDPOINT_
 
 ## Licenses and attribution
 
+* **Code:** [MIT](LICENSE). This covers `src/`, `scripts/`, `tests/`, `configs/` and the code cells of the notebooks.
 * **Dataset:** [YTSeg](https://huggingface.co/datasets/retkowski/ytseg) by Retkowski & Waibel is licensed **CC BY-NC-SA 4.0**. It was introduced in *From Text Segmentation to Smart Chaptering: A Novel Benchmark for Structuring Video Transcriptions* (EACL 2024). This repository does not redistribute the transcripts. Some material here is derived from the dataset:
   * notebook outputs that quote transcript sentences and gold chapter titles;
   * the model predictions and metrics in `results/` and `reports/`.
