@@ -11,6 +11,7 @@ Every number on the page comes from the results JSON.
 import argparse
 import html
 import json
+import re
 from pathlib import Path
 
 ORDER = [("E1", "T5Gemma 9B-2B", "encoder-decoder"), ("E2", "T5Gemma 2B-2B", "encoder-decoder"),
@@ -241,14 +242,137 @@ def method_section(data):
 """
 
 
+FAIL_COLORS = ["g0", "g1", "g2", "g3", "g4", "g5"]
+
+
+def failure_section(fa):
+    """Failure causes, chapter counts and length breakdown (reports/failure-analysis.json)."""
+    if not fa:
+        return ""
+    test = fa["test"]
+    groups = list(fa["groups"].items())
+    names = {"ZS": "zero-shot", "FT": "LoRA", "RFTv2": "RFT v2"}
+
+    def label(cfg):
+        a, arm = cfg.split("-")
+        return f"{a} {names.get(arm, arm)}"
+
+    # stacked bars: failed videos by cause group, as a share of all 1,448 test videos
+    width, left, row_h = 640, 120, 26
+    height = row_h * len(test) + 44
+    bars = []
+    for i, t in enumerate(test):
+        y = 10 + i * row_h
+        x = left
+        bars.append(f'<text x="{left - 8}" y="{y + 13}" text-anchor="end" class="lab">{esc(label(t["config"]))}</text>')
+        for gi, (group, causes) in enumerate(groups):
+            n = sum(t["video_causes"].get(c, 0) for c in causes)
+            if n:
+                w = (width - left - 60) * n / t["videos"]
+                bars.append(f'<rect x="{x:.1f}" y="{y}" width="{max(w, 1.5):.1f}" height="16" class="{FAIL_COLORS[gi]}">'
+                            f'<title>{esc(group)}: {n}</title></rect>')
+                x += max(w, 1.5)
+        bars.append(f'<text x="{x + 6:.1f}" y="{y + 13}" class="val">{t["failed_videos"]:,}</text>')
+    axis_y = 10 + len(test) * row_h + 4
+    for frac in [0, .25, .5, .75, 1]:
+        ax = left + (width - left - 60) * frac
+        bars.append(f'<line x1="{ax:.1f}" y1="6" x2="{ax:.1f}" y2="{axis_y}" class="grid"/>'
+                    f'<text x="{ax:.1f}" y="{axis_y + 14}" text-anchor="middle" class="axis">{int(frac * 100)}%</text>')
+    legend = "".join(f'<span class="lgd"><i class="{FAIL_COLORS[gi]}"></i>{esc(g)}</span>' for gi, (g, _) in enumerate(groups))
+    chart_svg = (f'<figure class="failchart"><svg viewBox="0 0 {width} {height}" role="img" '
+                 f'aria-label="Failed test videos by cause and configuration">{"".join(bars)}</svg>'
+                 f'<figcaption>{legend}</figcaption></figure>')
+
+    head = "".join(f'<th scope="col">{esc(label(t["config"]))}</th>' for t in test)
+    body = []
+    for group, causes in groups:
+        totals = [sum(t["video_causes"].get(c, 0) for c in causes) for t in test]
+        body.append(f'<tr class="group"><th scope="row">{esc(group)}</th>' + "".join(f"<td>{v or '·'}</td>" for v in totals) + "</tr>")
+        for cause in causes:
+            values = [t["video_causes"].get(cause, 0) for t in test]
+            if any(values):
+                body.append(f'<tr class="sub"><th scope="row">{esc(cause)}</th>' + "".join(f"<td>{v or '·'}</td>" for v in values) + "</tr>")
+    body.append('<tr class="total"><th scope="row">Failed videos</th>' + "".join(f"<td>{t['failed_videos']:,}</td>" for t in test) + "</tr>")
+    cause_table = (f'<div class="scroll"><table class="causes"><caption>Failed test videos by cause (first failed window of each video)</caption>'
+                   f'<thead><tr><th scope="col">Cause</th>{head}</tr></thead><tbody>{"".join(body)}</tbody></table></div>')
+
+    def pc(x):
+        return "–" if x is None else f"{x:.0f}%"
+
+    def nm(x, digits):
+        return "–" if x is None else num(x, digits)
+
+    count_rows = []
+    for t in test:
+        c = t["chapter_counts"]
+        count_rows.append(
+            f'<tr><th scope="row">{esc(label(t["config"]))}</th><td>{c["ok_videos"]:,}</td><td>{nm(c["gold_mean"], 1)}</td>'
+            f'<td>{nm(c["pred_mean"], 1)}</td><td>{nm(c["pred_per_gold"], 2)}</td><td>{pc(c["under_pct"])}</td>'
+            f'<td>{pc(c["exact_count_pct"])}</td><td>{pc(c["over_pct"])}</td><td>{pc(c["within_1_pct"])}</td>'
+            f'<td>{nm(c["spearman_pred_vs_gold"], 2)}</td><td>{c["one_sentence_chapter_runs"]}</td><td>{c["single_chapter_for_3plus_gold"]}</td></tr>')
+    count_table = ('<div class="scroll"><table><caption>Predicted vs gold chapter counts (test, parsed videos only)</caption><thead><tr>'
+                   '<th scope="col">Configuration</th><th scope="col">Parsed</th><th scope="col">Gold mean</th><th scope="col">Pred mean</th>'
+                   '<th scope="col">Pred ÷ gold</th><th scope="col">Under</th><th scope="col">Exact</th><th scope="col">Over</th>'
+                   '<th scope="col">Within ±1</th><th scope="col">Spearman ρ</th><th scope="col">1-sentence runs</th>'
+                   '<th scope="col">1 chapter, gold ≥3</th></tr></thead><tbody>' + "".join(count_rows) + "</tbody></table></div>")
+
+    length_rows = []
+    buckets = ["1 window", "2 windows", "3+ windows"]
+    for t in test:
+        cells = "".join(f'<td>{t["by_windows"][b]["exact_f1"]:.3f}</td><td>{t["by_windows"][b]["failed_pct"]:.0f}%</td>'
+                        f'<td>{nm(t["by_windows"][b]["pred_per_gold"], 2)}</td>' for b in buckets)
+        length_rows.append(f'<tr><th scope="row">{esc(label(t["config"]))}</th>{cells}</tr>')
+    sizes = test[0]["by_windows"]
+    bucket_head = "".join(f'<th scope="colgroup" colspan="3">{b} <span class="n">n={sizes[b]["videos"]:,}</span></th>' for b in buckets)
+    length_table = ('<div class="scroll"><table><caption>By video length (test): exact F1 · failed · predicted ÷ gold chapters</caption>'
+                    f'<thead><tr><th scope="col" rowspan="2">Configuration</th>{bucket_head}</tr><tr>'
+                    + '<th scope="col">F1</th><th scope="col">Failed</th><th scope="col">Pred ÷ gold</th>' * 3
+                    + "</tr></thead><tbody>" + "".join(length_rows) + "</tbody></table></div>")
+
+    examples = []
+    for t in test:
+        if t["failed_videos"] >= 10:
+            items = "".join(f'<li><strong>{esc(cause)}</strong> ({n} windows)<code>{esc(t["examples"].get(cause, "")[:200])}</code></li>'
+                            for cause, n in list(t["window_causes"].items())[:3])
+            examples.append(f'<details><summary>{esc(label(t["config"]))}: {t["failed_windows"]:,} failed windows</summary><ul class="ex">{items}</ul></details>')
+    def inline(s):
+        s = esc(s).replace("(section 4)", "(table above)")
+        s = re.sub(r"\*\*(.+?)\*\*", r"<strong>\1</strong>", s)
+        return re.sub(r"`(.+?)`", r"<code>\1</code>", s)
+
+    items = []
+    for s in fa.get("summary", []):
+        if s.startswith("  "):
+            items[-1][1].append(inline(s.strip()[2:]))
+        else:
+            items.append([inline(s[2:]), []])
+    summary = "".join(f"<li>{head}" + (f"<ul>{''.join(f'<li>{x}</li>' for x in sub)}</ul>" if sub else "") + "</li>"
+                      for head, sub in items)
+    return f"""
+<section aria-labelledby="t7">
+  <h2 id="t7">Failure analysis and chapter counts</h2>
+  <p>A video fails when any of its windows fails strict parsing; it then scores 0 and stays in every average. Each failed window is put into exactly one cause, and a failed video is attributed to its first failed window. <em>Format wrapper</em> failures are valid JSON inside a Markdown fence or followed by a period; the secondary lenient reading accepts exactly those.</p>
+  {chart_svg}
+  {cause_table}
+  <div class="examples">{"".join(examples)}</div>
+  {count_table}
+  <p class="note">Under / Exact / Over: share of parsed videos with fewer, exactly as many, or more chapters than gold. Spearman ρ: whether videos with more gold chapters also get more predicted chapters. E1 zero-shot parses only 13 videos, so its count statistics are not meaningful. Pred ÷ gold here counts parsed videos only on both sides; the <em>Predicted / reference chapters</em> column in the test table divides by all reference chapters, so failed videos pull it down (M1 LoRA 0.97 there, 1.08 here).</p>
+  {length_table}
+  <ul class="findings">{summary}</ul>
+</section>
+"""
+
+
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--results", type=Path, required=True)
     parser.add_argument("--findings", type=Path, required=True)
     parser.add_argument("--output", type=Path, required=True)
+    parser.add_argument("--failures", type=Path, default=None, help="reports/failure-analysis.json (optional section)")
     args = parser.parse_args()
     data = json.loads(args.results.read_text())
     notes = json.loads(args.findings.read_text())
+    failures = json.loads(args.failures.read_text()) if args.failures else None
     test, dev, rft = data["test"], data["dev"], data["rft"]
     pack = data.get("test_pack") or {}
 
@@ -376,6 +500,18 @@ figure svg {{ width: 100%; min-width: 520px; height: auto; display: block }}
 figcaption {{ display: flex; gap: 18px; flex-wrap: wrap; font-size: 13px; color: var(--muted); padding: 4px 14px 8px }}
 .key {{ display: inline-block; width: 12px; height: 12px; border-radius: 2px; vertical-align: -1px; margin-right: 6px }}
 svg .grid {{ stroke: var(--line); stroke-width: 1 }}
+.g0 {{ fill: #8a97a8; background: #8a97a8 }} .g1 {{ fill: #c98a00; background: #c98a00 }} .g2 {{ fill: #b3261e; background: #b3261e }}
+.g3 {{ fill: #7b4fc9; background: #7b4fc9 }} .g4 {{ fill: #2f5fd0; background: #2f5fd0 }} .g5 {{ fill: #18794e; background: #18794e }}
+figure.failchart svg .lab, figure.failchart svg .val, figure.failchart svg .axis {{ fill: var(--muted); font-size: 12px }}
+figure.failchart figcaption {{ display: flex; flex-wrap: wrap; gap: 6px 16px; font-size: 13px; color: var(--muted); padding: 6px 4px }}
+figure.failchart .lgd i {{ display: inline-block; width: 10px; height: 10px; border-radius: 2px; margin-right: 6px; vertical-align: -1px }}
+table.causes tr.group th, table.causes tr.group td {{ font-weight: 600 }}
+table.causes tr.sub th {{ font-weight: 400; color: var(--muted); padding-left: 30px }}
+table.causes tr.sub td {{ color: var(--muted) }}
+table.causes tr.total th, table.causes tr.total td {{ font-weight: 600; border-top: 2px solid var(--line) }}
+.examples details {{ background: var(--surface); border: 1px solid var(--line); border-radius: 6px; padding: 8px 14px; margin: 8px 0 }}
+.examples summary {{ cursor: pointer; font-weight: 500 }}
+ul.ex code {{ display: block; white-space: pre-wrap; word-break: break-word; font-size: 12px; color: var(--muted); margin: 4px 0 10px }}
 svg .tick, svg .sublabel {{ fill: var(--muted); font: 11px var(--body) }}
 svg .label {{ fill: var(--fg); font: 600 14px var(--body) }}
 svg .value {{ fill: var(--fg); font: 12px var(--mono) }}
@@ -408,7 +544,7 @@ footer {{ color: var(--muted); font-size: 13px }}
 </header>
 
 <section class="summary" aria-labelledby="sum"><h2 id="sum">Summary</h2><ul>{summary}</ul></section>
-<nav class="toc" aria-label="Sections"><a href="#m0">Method</a><a href="#t1">Test results</a><a href="#t2">Dev evidence</a><a href="#t3">RFT</a><a href="#t4">Long transcripts</a><a href="#t5">Compute and time</a><a href="#t6">Caveats</a></nav>
+<nav class="toc" aria-label="Sections"><a href="#m0">Method</a><a href="#t1">Test results</a><a href="#t2">Dev evidence</a><a href="#t3">RFT</a><a href="#t4">Long transcripts</a><a href="#t7">Failures</a><a href="#t5">Compute and time</a><a href="#t6">Caveats</a></nav>
 {method_section(data)}
 <section aria-labelledby="t1">
   <h2 id="t1">Held-out test</h2>
@@ -457,6 +593,8 @@ footer {{ color: var(--muted); font-size: 13px }}
   <thead><tr><th scope="col">Configuration</th><th scope="col">All videos</th><th scope="col">1 window</th><th scope="col">2 windows</th><th scope="col">3+ windows</th></tr></thead>
   <tbody>{"".join(val_rows)}</tbody></table></div>
 </section>
+
+{failure_section(failures)}
 
 {time_section(data)}
 

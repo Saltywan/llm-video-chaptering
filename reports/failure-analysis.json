@@ -1,0 +1,1241 @@
+{
+ "groups": {
+  "Format wrapper (recoverable)": [
+   "Markdown fence around JSON",
+   "trailing period"
+  ],
+  "Extra text": [
+   "text before JSON",
+   "text after JSON",
+   "text around JSON",
+   "several JSON objects",
+   "prose, no JSON",
+   "empty answer"
+  ],
+  "Broken JSON": [
+   "incomplete JSON",
+   "missing \"title\" key",
+   "unescaped quote in a title",
+   "timestamps instead of sentence indices",
+   "invalid JSON syntax"
+  ],
+  "Wrong structure": [
+   "bare list instead of {chapters: ...}",
+   "wrong JSON schema"
+  ],
+  "Invalid chapter starts": [
+   "start past window end",
+   "start before window",
+   "starts repeated or out of order",
+   "empty title"
+  ],
+  "Did not finish": [
+   "cut off: runaway chapter list",
+   "cut off: echoing the transcript",
+   "cut off: repetition loop",
+   "cut off: still thinking",
+   "cut off: long output",
+   "thinking never closed"
+  ]
+ },
+ "test": [
+  {
+   "config": "E1-ZS",
+   "videos": 1448,
+   "windows": 1905,
+   "failed_videos": 1435,
+   "failed_windows": 1890,
+   "window_causes": {
+    "Markdown fence around JSON": 1460,
+    "cut off: runaway chapter list": 199,
+    "unescaped quote in a title": 71,
+    "text around JSON": 52,
+    "text before JSON": 25,
+    "prose, no JSON": 21,
+    "invalid JSON syntax": 19,
+    "incomplete JSON": 15,
+    "bare list instead of {chapters: ...}": 15,
+    "text after JSON": 5,
+    "cut off: echoing the transcript": 4,
+    "cut off: long output": 2,
+    "several JSON objects": 1,
+    "cut off: repetition loop": 1
+   },
+   "video_causes": {
+    "Markdown fence around JSON": 1175,
+    "cut off: runaway chapter list": 127,
+    "unescaped quote in a title": 55,
+    "text around JSON": 27,
+    "invalid JSON syntax": 16,
+    "incomplete JSON": 12,
+    "text before JSON": 9,
+    "prose, no JSON": 8,
+    "text after JSON": 2,
+    "bare list instead of {chapters: ...}": 2,
+    "cut off: echoing the transcript": 1,
+    "cut off: repetition loop": 1
+   },
+   "examples": {
+    "Markdown fence around JSON": "```json {\"chapters\": [{\"start\": 0, \"title\": \"Introduction to Wormholes\"}, {\"start\": 4, \"title\": \"What are Wormholes?\"}, {\"start\": 9, \"title\": \"Types of Wormholes\"}, {\"start\": 10, \"title\": \"Schwarzschild Wormholes\"}, {\"st",
+    "unescaped quote in a title": "```json {\"chapters\": [{\"start\": 0, \"title\": \"Chicken Myths and Misconceptions\"}, {\"start\": 16, \"title\": \"Fried Chicken: Crispy and Juicy\"}, {\"start\": 26, \"title\": \"Cooking Chicken to Perfection\"}, {\"start\": 34, \"title\": ",
+    "cut off: runaway chapter list": "```json {\"chapters\": [{\"start\": 0, \"title\": \"Introduction\"}, {\"start\": 6, \"title\": \"What is a terminal\"}, {\"start\": 7, \"title\": \"Windows Terminal\"}, {\"start\": 8, \"title\": \"Bash Commands\"}, {\"start\": 9, \"title\": \"Bash Com",
+    "text before JSON": "## {\"chapters\": [{\"start\": 0, \"title\": \"Introduction\"}, {\"start\": 1, \"title\": \"Fermentation: A Global Tradition\"}, {\"start\": 2, \"title\": \"Fermented Foods: A Delicious and Healthy Choice\"}, {\"start\": 3, \"title\": \"The Scie",
+    "incomplete JSON": "```json {\"chapters\": [{\"start\": 0, \"title\": \"Introduction to Vacation House Rules\"}, {\"start\": 1, \"title\": \"Where is Vacation House Rules Filmed?\"}, {\"start\": 2, \"title\": \"Scott McGillivray's Background\"}, {\"start\": 3, \"",
+    "invalid JSON syntax": "{\"chapters\": [\"{\"start\": 0, \"title\": \"Introduction to Lego Microgame\"}, {\"start\": 3, \"title\": \"Getting Unity\"}, {\"start\": 14, \"title\": \"Tutorials\"}, {\"start\": 29, \"title\": \"Building and Sharing Your Game\"}, {\"start\": 30,",
+    "text around JSON": "## Short Title  ```json {\"chapters\": [{\"start\": 0, \"title\": \"Introduction\"}, {\"start\": 4, \"title\": \"Preemption and Defamation\"}, {\"start\": 6, \"title\": \"Product Disparagement Cases\"}, {\"start\": 7, \"title\": \"The Alar Case\"",
+    "text after JSON": "[{\"start\":0,\"title\":\"Intro and Brittany's Background\"},{\"start\":14,\"title\":\"How Brittany and Sabir Met\"},{\"start\":27,\"title\":\"Brittany's Journey to Personal Branding\"},{\"start\":57,\"title\":\"The Importance of Clarity\"},{\"s",
+    "bare list instead of {chapters: ...}": "```json [   {     \"start\": 279,     \"title\": \"Introduction\"   },   {     \"start\": 295,     \"title\": \"Cooling and Hyperthermia\"   },   {     \"start\": 305,     \"title\": \"Cognitive Effects of Heat\"   },   {     \"start\": 325",
+    "prose, no JSON": "This is a transcript of a lecture on Markov Decision Processes (MDPs) and policy iteration. Here's a breakdown of the content and a summary of the key points:  **1. Introduction to MDPs**  * **Definition:** An MDP is a t",
+    "several JSON objects": "[1697] {\"chapters\": [{\"start\": 1388, \"title\": \"Introduction\"}, {\"start\": 1397, \"title\": \"The Disputed Election of 1876\"}, {\"start\": 1404, \"title\": \"The Deal\"}, {\"start\": 1411, \"title\": \"The Confederacy Wins\"}, {\"start\": ",
+    "cut off: long output": "This is a transcript of a conversation between a journalist and a podcaster about the impact of social media on society. The transcript is divided into chapters based on the topic of the conversation. Each chapter has a ",
+    "cut off: echoing the transcript": "[786] So let's go ahead and use a list comprehension to filter out the non-values from our surrounded cells list. [787] So I'm going to replace this entire line with something like the following. [788] So I'm going to sa",
+    "cut off: repetition loop": "This is a great start to a Django tutorial! Here's a breakdown of the transcript and some suggestions for improvement:  **Chapter 1: Introduction and Setup**  * **Start:** 0 * **Title:** \"Hello everybody. And welcome to "
+   },
+   "chapter_counts": {
+    "ok_videos": 13,
+    "gold_mean": 5.384615384615385,
+    "pred_mean": 17.23076923076923,
+    "gold_median": 6,
+    "pred_median": 16,
+    "pred_per_gold": 3.2,
+    "under_pct": 7.6923076923076925,
+    "exact_count_pct": 0.0,
+    "over_pct": 92.3076923076923,
+    "within_1_pct": 7.6923076923076925,
+    "double_or_more_pct": 84.61538461538461,
+    "half_or_less_pct": 0.0,
+    "spearman_pred_vs_gold": 0.561130595150602,
+    "one_sentence_chapter_runs": 8,
+    "single_chapter_for_3plus_gold": 0,
+    "pred_minus_gold_hist": {
+     "-1": 1,
+     "3": 1,
+     "6": 11
+    }
+   },
+   "by_windows": {
+    "1 window": {
+     "videos": 1214,
+     "failed_pct": 98.92915980230642,
+     "exact_f1": 0.003422571513334752,
+     "gold_chapters_mean": 8.577429983525535,
+     "pred_chapters_mean": 17.23076923076923,
+     "pred_per_gold": 3.2
+    },
+    "2 windows": {
+     "videos": 143,
+     "failed_pct": 100.0,
+     "exact_f1": 0,
+     "gold_chapters_mean": 9.034965034965035,
+     "pred_chapters_mean": null,
+     "pred_per_gold": null
+    },
+    "3+ windows": {
+     "videos": 91,
+     "failed_pct": 100.0,
+     "exact_f1": 0,
+     "gold_chapters_mean": 17.483516483516482,
+     "pred_chapters_mean": null,
+     "pred_per_gold": null
+    }
+   }
+  },
+  {
+   "config": "E1-FT",
+   "videos": 1448,
+   "windows": 1905,
+   "failed_videos": 27,
+   "failed_windows": 27,
+   "window_causes": {
+    "unescaped quote in a title": 13,
+    "invalid JSON syntax": 6,
+    "starts repeated or out of order": 4,
+    "missing \"title\" key": 2,
+    "start past window end": 1,
+    "wrong JSON schema": 1
+   },
+   "video_causes": {
+    "unescaped quote in a title": 13,
+    "invalid JSON syntax": 6,
+    "starts repeated or out of order": 4,
+    "missing \"title\" key": 2,
+    "start past window end": 1,
+    "wrong JSON schema": 1
+   },
+   "examples": {
+    "missing \"title\" key": "{\"chapters\":[{\"start\":0,\"title\":\"Chicken skin is healthy\"},{\"start\":16,\"fried chicken needs to be crisped in the oven\"},{\"start\":26,\"chicken needs to be cooked to 165 degrees Fahrenheit\"},{\"start\":34,\"beer-can chicken is",
+    "starts repeated or out of order": "{\"chapters\":[{\"start\":0,\"title\":\"Intro\"},{\"start\":3,\"title\":\"Copahue Eruption\"},{\"start\":23,\"title\":\"Ahyi Submarine Eruption\"},{\"start\":5,\"title\":\"Ambrym Volcano\"},{\"start\":26,\"title\":\"Erupting Volcanoes\"},{\"start\":27,\"t",
+    "unescaped quote in a title": "{\"chapters\":[{\"start\":0,\"title\":\"Intro\"},{\"start\":19,\"title\":\"Mise-En-Scene\"},{\"start\":28,\"title\":\"Citizen Kane\"},{\"start\":38,\"title\":\"Mise-En-Scene as a Math Problem\"},{\"start\":46,\"title\":\"Naturalistic and Theatrical Mi",
+    "invalid JSON syntax": "{\"chapters\":[{\"start\":0,\"title\":\"Burning mouth syndrome\"},{\"start\":11,\"\"title\":\"Eating questionable food\"},{\"start\":20,\"title\":\"Gifts from locals\"},{\"start\":27,\"title\":\"Street food\"},{\"start\":36,\"title\":\"Not eating every",
+    "start past window end": "{\"chapters\":[{\"start\":0,\"title\":\"Introduction\"},{\"start\":7,\"title\":\"What is Process?\"},{\"start\":11,\"title\":\"How OS creates a process?\"},{\"start\":17,\"title\":\"Process Architecture\"},{\"start\":20,\"title\":\"Attributes of Proce",
+    "wrong JSON schema": "{\"chapters\":[{\"start\":2457,\"title\":\"Create a view route\"},{\"start\":2469,\"start\":2511,\"title\":\"Fix errors\"},{\"start\":2534,\"title\":\"Add to-do lists to specific users\"},{\"start\":2564,\"title\":\"Make it so you can't view other"
+   },
+   "chapter_counts": {
+    "ok_videos": 1421,
+    "gold_mean": 9.150598170302604,
+    "pred_mean": 8.83884588318086,
+    "gold_median": 8,
+    "pred_median": 7,
+    "pred_per_gold": 0.9659309390140737,
+    "under_pct": 39.12737508796622,
+    "exact_count_pct": 27.234342012667135,
+    "over_pct": 33.638282899366644,
+    "within_1_pct": 54.82054890921886,
+    "double_or_more_pct": 5.9817030260380015,
+    "half_or_less_pct": 7.037297677691766,
+    "spearman_pred_vs_gold": 0.6286288480198389,
+    "one_sentence_chapter_runs": 3,
+    "single_chapter_for_3plus_gold": 0,
+    "pred_minus_gold_hist": {
+     "-6": 91,
+     "-5": 43,
+     "-4": 51,
+     "-3": 63,
+     "-2": 108,
+     "-1": 200,
+     "0": 387,
+     "1": 192,
+     "2": 98,
+     "3": 49,
+     "4": 33,
+     "5": 32,
+     "6": 74
+    }
+   },
+   "by_windows": {
+    "1 window": {
+     "videos": 1214,
+     "failed_pct": 1.4003294892915963,
+     "exact_f1": 0.5229011702414872,
+     "gold_chapters_mean": 8.577429983525535,
+     "pred_chapters_mean": 7.958228905597327,
+     "pred_per_gold": 0.930091778949424
+    },
+    "2 windows": {
+     "videos": 143,
+     "failed_pct": 2.7972027972028024,
+     "exact_f1": 0.3157236480739714,
+     "gold_chapters_mean": 9.034965034965035,
+     "pred_chapters_mean": 10.215827338129497,
+     "pred_per_gold": 1.12609040444092
+    },
+    "3+ windows": {
+     "videos": 91,
+     "failed_pct": 6.593406593406592,
+     "exact_f1": 0.2242754190170815,
+     "gold_chapters_mean": 17.483516483516482,
+     "pred_chapters_mean": 18.988235294117647,
+     "pred_per_gold": 1.076
+    }
+   }
+  },
+  {
+   "config": "E2-ZS",
+   "videos": 1448,
+   "windows": 1905,
+   "failed_videos": 477,
+   "failed_windows": 776,
+   "window_causes": {
+    "prose, no JSON": 207,
+    "text around JSON": 182,
+    "trailing period": 92,
+    "cut off: echoing the transcript": 86,
+    "text before JSON": 46,
+    "Markdown fence around JSON": 36,
+    "invalid JSON syntax": 23,
+    "start past window end": 20,
+    "unescaped quote in a title": 19,
+    "wrong JSON schema": 18,
+    "text after JSON": 12,
+    "cut off: runaway chapter list": 10,
+    "cut off: long output": 10,
+    "several JSON objects": 9,
+    "cut off: repetition loop": 4,
+    "incomplete JSON": 2
+   },
+   "video_causes": {
+    "prose, no JSON": 113,
+    "text around JSON": 104,
+    "trailing period": 74,
+    "cut off: echoing the transcript": 41,
+    "text before JSON": 34,
+    "start past window end": 20,
+    "Markdown fence around JSON": 19,
+    "invalid JSON syntax": 19,
+    "unescaped quote in a title": 17,
+    "wrong JSON schema": 14,
+    "text after JSON": 9,
+    "cut off: runaway chapter list": 7,
+    "cut off: long output": 3,
+    "incomplete JSON": 2,
+    "several JSON objects": 1
+   },
+   "examples": {
+    "Markdown fence around JSON": "```json {\"chapters\": [{\"start\": 0, \"title\": \"Introduction to Terminal Commands\"}, {\"start\": 1, \"title\": \"Navigating the Terminal\"}, {\"start\": 2, \"title\": \"File and Directory Management\"}, {\"start\": 3, \"title\": \"Viewing F",
+    "prose, no JSON": "This is a fascinating look into the world of memory chip manufacturing. The author provides a detailed account of the process, from the initial wafer creation to the final testing of the finished memory modules. The auth",
+    "text after JSON": "[283] So, yeah, the market was there already back then and it's growing. [284] So, I thought to myself, well, why not create a separate company for this? [285] So, Creative AI was born in 2021, and it's separate from Cre",
+    "several JSON objects": "## Diego's Journey: From Italy to International Success  {\"chapters\": [   {\"start\": 251, \"title\": \"The Italian Market and Creative Words\"}   {\"start\": 267, \"title\": \"Creative Words: Services and Focus\"}   {\"start\": 279, ",
+    "text before JSON": "This lecture discusses John Milton's epic poem *Paradise Lost*, focusing on the poem's theodicy and Milton's theological wrestling with the concept of free will. The lecture argues that Milton seeks to vindicate God's wa",
+    "text around JSON": "This is a transcript of a lecture on data structures in CS50. The transcript is divided into chapters based on the topics discussed. Each chapter is given a concise title supported only by visible text. The chapters are:",
+    "cut off: echoing the transcript": "Yes, this is a binary search tree. [1801] All right. [1802] So let's ask the question as before about running time of this. [1803] It would look like binary search is back. [1804] And we can now do things in logarithmic ",
+    "trailing period": "{\"chapters\": [{\"start\": 0, \"title\": \"Putinism as a System\"}]}.",
+    "start past window end": "{\"chapters\": [{\"start\": 0, \"title\": \"Introduction to Table Designer in Azure Data Studio\"}, {\"start\": 12, \"title\": \"Table Designer Features and Functionality\"}, {\"start\": 167, \"title\": \"Wrap-up and Resources\"}]}",
+    "invalid JSON syntax": "{\"chapters\": [{\"start\": 0, \"title\": \"The Montage: A Simple Story Device\"}], {\"start\": 6, \"title\": \"Nolan's Montages: Beyond the Training Montage\"}], {\"start\": 16, \"title\": \"Nolan's Montages: Character Development and The",
+    "unescaped quote in a title": "{   \"chapters\": [     {       \"start\": 0,       \"title\": \"Introduction to Story Structure and \"Parasite\"\"     },     {       \"start\": 16,       \"title\": \"The Kim Family and Their Scheme\"     },     {       \"start\": 22,  ",
+    "cut off: runaway chapter list": "{\"chapters\": [{\"start\": 0, \"title\": \"Early Roots of Depth-First Search\"}, {\"start\": 1, \"title\": \"Depth-First Search in Prolog\"}, {\"start\": 2, \"title\": \"Backtracking in Prolog\"}, {\"start\": 3, \"title\": \"Prolog Query with V",
+    "cut off: long output": "You're asking how long does it take to discharge the capacitor completely? 612] The answer is infinite. 613] Why is it not able to discharge it completely? 614] Can you think about that? 615] Why doesn't it just get over",
+    "incomplete JSON": "{\"chapters\": [{\"start\": 0, \"title\": \"Google Cloud Platform Announcements for February 2022\"}, {\"start\": 4, \"title\": \"Dataproc Serverless for Spark and BigQuery Spark Private Preview\"}, {\"start\": 7, \"title\": \"Bigtable Aut",
+    "wrong JSON schema": "{\"chapters\": [{\"start\": 0, \"title\": \"The Best Bacon Brands\"}, {\"start\": 10, \"title\": \"Applegate's Bacon\"}, {\"start\": 20, \"title\": \"Oscar Mayer Bacon\"}, {\"start\": 31, \"title\": \"Premium Bacon Options\"}, {\"start\": 34, \"titl",
+    "cut off: repetition loop": "Lex sighs deeply. \"I think it's important to be very careful about using the term 'derangement syndrome' because it's a medical term, and it's not appropriate to apply it to political opinions. It's important to remember"
+   },
+   "chapter_counts": {
+    "ok_videos": 971,
+    "gold_mean": 8.394438722966015,
+    "pred_mean": 8.7610710607621,
+    "gold_median": 8,
+    "pred_median": 8,
+    "pred_per_gold": 1.043675622622991,
+    "under_pct": 43.76930998970134,
+    "exact_count_pct": 12.049433573635428,
+    "over_pct": 44.18125643666323,
+    "within_1_pct": 31.307929969104016,
+    "double_or_more_pct": 14.830072090628219,
+    "half_or_less_pct": 24.20185375901133,
+    "spearman_pred_vs_gold": 0.16431239980970896,
+    "one_sentence_chapter_runs": 284,
+    "single_chapter_for_3plus_gold": 177,
+    "pred_minus_gold_hist": {
+     "-6": 162,
+     "-5": 42,
+     "-4": 41,
+     "-3": 51,
+     "-2": 54,
+     "-1": 75,
+     "0": 117,
+     "1": 112,
+     "2": 63,
+     "3": 45,
+     "4": 32,
+     "5": 34,
+     "6": 143
+    }
+   },
+   "by_windows": {
+    "1 window": {
+     "videos": 1214,
+     "failed_pct": 20.016474464579904,
+     "exact_f1": 0.17764293841841222,
+     "gold_chapters_mean": 8.577429983525535,
+     "pred_chapters_mean": 8.7610710607621,
+     "pred_per_gold": 1.043675622622991
+    },
+    "2 windows": {
+     "videos": 143,
+     "failed_pct": 100.0,
+     "exact_f1": 0,
+     "gold_chapters_mean": 9.034965034965035,
+     "pred_chapters_mean": null,
+     "pred_per_gold": null
+    },
+    "3+ windows": {
+     "videos": 91,
+     "failed_pct": 100.0,
+     "exact_f1": 0,
+     "gold_chapters_mean": 17.483516483516482,
+     "pred_chapters_mean": null,
+     "pred_per_gold": null
+    }
+   }
+  },
+  {
+   "config": "E2-FT",
+   "videos": 1448,
+   "windows": 1905,
+   "failed_videos": 4,
+   "failed_windows": 4,
+   "window_causes": {
+    "unescaped quote in a title": 2,
+    "start past window end": 2
+   },
+   "video_causes": {
+    "unescaped quote in a title": 2,
+    "start past window end": 2
+   },
+   "examples": {
+    "unescaped quote in a title": "{\"chapters\":[{\"start\":0,\"title\":\"What makes corned beef \"corned?\"\"},{\"start\":16,\"title\":\"How did Spam lead to the popularity of canned corned beef?\"},{\"start\":29,\"title\":\"Why is the can shaped like that?\"},{\"start\":37,\"t",
+    "start past window end": "{\"chapters\":[{\"start\":0,\"title\":\"Introduction\"},{\"start\":50,\"title\":\"ODS Graphics\"},{\"start\":79,\"title\":\"SGPLOT\"},{\"start\":152,\"title\":\"Additional SGPLOT Steps\"},{\"start\":193,\"title\":\"SGPLOT Examples\"},{\"start\":212,\"titl"
+   },
+   "chapter_counts": {
+    "ok_videos": 1444,
+    "gold_mean": 9.172437673130194,
+    "pred_mean": 8.852493074792244,
+    "gold_median": 8.0,
+    "pred_median": 8.0,
+    "pred_per_gold": 0.965118912797282,
+    "under_pct": 35.87257617728532,
+    "exact_count_pct": 27.977839335180054,
+    "over_pct": 36.149584487534625,
+    "within_1_pct": 53.393351800554015,
+    "double_or_more_pct": 5.193905817174516,
+    "half_or_less_pct": 6.024930747922438,
+    "spearman_pred_vs_gold": 0.6479888056417801,
+    "one_sentence_chapter_runs": 1,
+    "single_chapter_for_3plus_gold": 0,
+    "pred_minus_gold_hist": {
+     "-6": 101,
+     "-5": 27,
+     "-4": 43,
+     "-3": 71,
+     "-2": 113,
+     "-1": 163,
+     "0": 404,
+     "1": 204,
+     "2": 126,
+     "3": 71,
+     "4": 38,
+     "5": 24,
+     "6": 59
+    }
+   },
+   "by_windows": {
+    "1 window": {
+     "videos": 1214,
+     "failed_pct": 0.08237232289950436,
+     "exact_f1": 0.5394307772403313,
+     "gold_chapters_mean": 8.577429983525535,
+     "pred_chapters_mean": 8.062654575432811,
+     "pred_per_gold": 0.9402942024805307
+    },
+    "2 windows": {
+     "videos": 143,
+     "failed_pct": 1.3986013986013957,
+     "exact_f1": 0.3246549979499228,
+     "gold_chapters_mean": 9.034965034965035,
+     "pred_chapters_mean": 9.702127659574469,
+     "pred_per_gold": 1.0746268656716418
+    },
+    "3+ windows": {
+     "videos": 91,
+     "failed_pct": 1.098901098901095,
+     "exact_f1": 0.2569449631796214,
+     "gold_chapters_mean": 17.483516483516482,
+     "pred_chapters_mean": 18.166666666666668,
+     "pred_per_gold": 1.040738383195417
+    }
+   }
+  },
+  {
+   "config": "M1-ZS",
+   "videos": 1448,
+   "windows": 1905,
+   "failed_videos": 4,
+   "failed_windows": 4,
+   "window_causes": {
+    "incomplete JSON": 4
+   },
+   "video_causes": {
+    "incomplete JSON": 4
+   },
+   "examples": {
+    "incomplete JSON": "{ \"chapters\":[ {\"start\":239,\"title\":\"Health and Animals\"}, {\"start\":281,\"title\":\"Meal Planner Pitch\"}, {\"start\":290,\"title\":\"Actor Journey\"}, {\"start\":418,\"title\":\"Documentary Review\"}, {\"start\":453,\"title\":\"Parenting St"
+   },
+   "chapter_counts": {
+    "ok_videos": 1444,
+    "gold_mean": 9.163434903047092,
+    "pred_mean": 11.468836565096954,
+    "gold_median": 8.0,
+    "pred_median": 9.0,
+    "pred_per_gold": 1.251587061668682,
+    "under_pct": 25.831024930747922,
+    "exact_count_pct": 12.81163434903047,
+    "over_pct": 61.35734072022161,
+    "within_1_pct": 38.227146814404435,
+    "double_or_more_pct": 16.274238227146814,
+    "half_or_less_pct": 2.839335180055402,
+    "spearman_pred_vs_gold": 0.5180777145259725,
+    "one_sentence_chapter_runs": 2,
+    "single_chapter_for_3plus_gold": 0,
+    "pred_minus_gold_hist": {
+     "-6": 56,
+     "-5": 13,
+     "-4": 27,
+     "-3": 55,
+     "-2": 82,
+     "-1": 140,
+     "0": 185,
+     "1": 227,
+     "2": 178,
+     "3": 114,
+     "4": 78,
+     "5": 54,
+     "6": 235
+    }
+   },
+   "by_windows": {
+    "1 window": {
+     "videos": 1214,
+     "failed_pct": 0.08237232289950436,
+     "exact_f1": 0.44604664167820635,
+     "gold_chapters_mean": 8.577429983525535,
+     "pred_chapters_mean": 9.305028854080792,
+     "pred_per_gold": 1.0856016158507262
+    },
+    "2 windows": {
+     "videos": 143,
+     "failed_pct": 0.0,
+     "exact_f1": 0.19560263683033552,
+     "gold_chapters_mean": 9.034965034965035,
+     "pred_chapters_mean": 16.244755244755243,
+     "pred_per_gold": 1.7979876160990713
+    },
+    "3+ windows": {
+     "videos": 91,
+     "failed_pct": 3.296703296703296,
+     "exact_f1": 0.1537698570938261,
+     "gold_chapters_mean": 17.483516483516482,
+     "pred_chapters_mean": 33.53409090909091,
+     "pred_per_gold": 1.9125081011017497
+    }
+   }
+  },
+  {
+   "config": "M1-FT",
+   "videos": 1448,
+   "windows": 1905,
+   "failed_videos": 116,
+   "failed_windows": 132,
+   "window_causes": {
+    "Markdown fence around JSON": 69,
+    "start past window end": 18,
+    "thinking never closed": 8,
+    "starts repeated or out of order": 7,
+    "wrong JSON schema": 6,
+    "unescaped quote in a title": 5,
+    "timestamps instead of sentence indices": 5,
+    "cut off: still thinking": 5,
+    "text before JSON": 4,
+    "text after JSON": 3,
+    "text around JSON": 1,
+    "empty title": 1
+   },
+   "video_causes": {
+    "Markdown fence around JSON": 58,
+    "start past window end": 17,
+    "thinking never closed": 7,
+    "wrong JSON schema": 6,
+    "starts repeated or out of order": 5,
+    "unescaped quote in a title": 5,
+    "timestamps instead of sentence indices": 5,
+    "cut off: still thinking": 5,
+    "text after JSON": 3,
+    "text before JSON": 3,
+    "text around JSON": 1,
+    "empty title": 1
+   },
+   "examples": {
+    "start past window end": "{\"chapters\":[{\"start\":0,\"title\":\"Intro\"},{\"start\":14,\"title\":\"Arrays / Data Structures (Intro)\"},{\"start\":26,\"title\":\"Array Limitation\"},{\"start\":31,\"title\":\"Adding a number to an array\"},{\"start\":52,\"title\":\"Array trade",
+    "Markdown fence around JSON": "```json {\"chapters\":[{\"start\":0,\"title\":\"Introduction\"},{\"start\":10,\"title\":\"Interplanetary mission duration\"},{\"start\":23,\"title\":\"#7 - Mercury\"},{\"start\":35,\"title\":\"#6 - Venus\"},{\"start\":42,\"title\":\"#5 - Mars\"},{\"star",
+    "thinking never closed": "Thinking Process:  1.  **Analyze the Request:**     *   Input: A transcript of a video about Bill of Materials (BOM) in manufacturing.     *   Task: Divide the transcript into contiguous topical chapters.     *   Require",
+    "wrong JSON schema": "{\"chapters\":[{\"start\":0,\"title\":\"Introduction\"},{\"start\":33,\"title\":\"Colorblindness Simulator\"},{\"start\":51,\"title\":\"Different examples\",\"start\":69,\"title\":\"Additional resources\",\"start\":83,\"title\":\"Closing thoughts\"}]}",
+    "starts repeated or out of order": "{\"chapters\":[{\"start\":0,\"title\":\"Introduction\"},{\"start\":6,\"title\":\"Statement of Fáry’s Theorem\"},{\"start\":8,\"title\":\"Conspiracy Boards as Graphs\"},{\"start\":15,\"title\":\"Graph Terminology\"},{\"start\":25,\"title\":\"Planar Emb",
+    "unescaped quote in a title": "{\"chapters\":[{\"start\":0,\"title\":\"Introduction\"},{\"start\":5,\"title\":\"The Importance of Jewelry\"},{\"start\":13,\"title\":\"More Than the \\\\\\\\\\\"Big Twenty\\\\\\\\\\\\\" Rings\"},{\"start\":21,\"title\":\"The Forging of the Rings of Power & ",
+    "timestamps instead of sentence indices": "{\"chapters\":[{\"start\":0,\"title\":\"Introduction\"},{\"start\":3:27,\"title\":\"Goals/Outcomes of the Class\"},{\"start\":58:00,\"title\":\"Path Number One: Three Fundamental, Substantive Questions About Happiness & Flourishing; Morali",
+    "cut off: still thinking": "The user wants me to segment the transcript into chapters with titles. The user provides specific instructions: 1. Divide the visible transcript into contiguous topical chapters. 2. Give each chapter a concise, specific ",
+    "text after JSON": "```json {\"chapters\":[{\"start\":0,\"title\":\"Introduction\"},{\"start\":8,\"title\":\"Big Bang Theory\"},{\"start\":34,\"title\":\"Steady State Theory\"},{\"start\":61,\"title\":\"Testability\"},{\"start\":89,\"title\":\"Evidence for Big Bang\"},{\"s",
+    "text before JSON": "```json {\"chapters\":[{\"start\":575,\"title\":\"Chapter\"},{\"start\":648,\"title\":\"Deadliest War in US History\"},{\"start\":789,\"title\":\"Interviewing Extremists\"},{\"start\":856,\"title\":\"Robert E. Lee\"}]}",
+    "text around JSON": "```json {\"chapters\":[{\"start\":0,\"title\":\"Intro\"},{\"start\":3,\"title\":\"The Sun goes supernova\"},{\"start\":5,\"title\":\"But what if it just becomes a neutron star\"},{\"start\":8,\"title\":\"What would it look like\"},{\"start\":14,\"ti",
+    "empty title": "{\"chapters\":[{\"start\":0,\"title\":\"\"},{\"start\":3,\"title\":\"Sonic's Ice Cream Blasts Might Contain Plastic\"},{\"start\":13,\"title\":\"Vanilla Soft Serve Can Be Nasty\"},{\"start\":26,\"title\":\"Cross Contamination of Allergens\"},{\"st"
+   },
+   "chapter_counts": {
+    "ok_videos": 1332,
+    "gold_mean": 8.987237237237236,
+    "pred_mean": 9.676426426426426,
+    "gold_median": 8.0,
+    "pred_median": 8.0,
+    "pred_per_gold": 1.076685322863587,
+    "under_pct": 30.405405405405407,
+    "exact_count_pct": 15.165165165165165,
+    "over_pct": 54.429429429429426,
+    "within_1_pct": 42.34234234234234,
+    "double_or_more_pct": 9.984984984984985,
+    "half_or_less_pct": 5.8558558558558556,
+    "spearman_pred_vs_gold": 0.5473636452746131,
+    "one_sentence_chapter_runs": 2,
+    "single_chapter_for_3plus_gold": 2,
+    "pred_minus_gold_hist": {
+     "-6": 79,
+     "-5": 17,
+     "-4": 42,
+     "-3": 67,
+     "-2": 75,
+     "-1": 125,
+     "0": 202,
+     "1": 237,
+     "2": 196,
+     "3": 79,
+     "4": 59,
+     "5": 34,
+     "6": 120
+    }
+   },
+   "by_windows": {
+    "1 window": {
+     "videos": 1214,
+     "failed_pct": 5.024711696869854,
+     "exact_f1": 0.40890600033081026,
+     "gold_chapters_mean": 8.577429983525535,
+     "pred_chapters_mean": 8.80138768430182,
+     "pred_per_gold": 1.0297311009639776
+    },
+    "2 windows": {
+     "videos": 143,
+     "failed_pct": 19.580419580419584,
+     "exact_f1": 0.15715013441444958,
+     "gold_chapters_mean": 9.034965034965035,
+     "pred_chapters_mean": 11.817391304347826,
+     "pred_per_gold": 1.3004784688995215
+    },
+    "3+ windows": {
+     "videos": 91,
+     "failed_pct": 29.670329670329664,
+     "exact_f1": 0.11075626195368556,
+     "gold_chapters_mean": 17.483516483516482,
+     "pred_chapters_mean": 21.59375,
+     "pred_per_gold": 1.2903828197945846
+    }
+   }
+  },
+  {
+   "config": "M2-ZS",
+   "videos": 1448,
+   "windows": 1905,
+   "failed_videos": 1,
+   "failed_windows": 1,
+   "window_causes": {
+    "invalid JSON syntax": 1
+   },
+   "video_causes": {
+    "invalid JSON syntax": 1
+   },
+   "examples": {
+    "invalid JSON syntax": "{\"chapters\":[{\"start\":340,\"title\":\"Nodes and the meaning of $\\Psi$\"},{\"start\":356,\"title\":\"Born's correction and Einstein\"},{\"start\":373,\"title\":\"Probability density by analogy\"},{\"start\":409,\"title\":\"Normalization of $\\"
+   },
+   "chapter_counts": {
+    "ok_videos": 1447,
+    "gold_mean": 9.185210780926054,
+    "pred_mean": 13.574291637871458,
+    "gold_median": 8,
+    "pred_median": 10,
+    "pred_per_gold": 1.4778421488225115,
+    "under_pct": 16.240497581202487,
+    "exact_count_pct": 11.886662059433311,
+    "over_pct": 71.8728403593642,
+    "within_1_pct": 33.93227366966137,
+    "double_or_more_pct": 20.870767104353835,
+    "half_or_less_pct": 1.65860400829302,
+    "spearman_pred_vs_gold": 0.5312091748737721,
+    "one_sentence_chapter_runs": 6,
+    "single_chapter_for_3plus_gold": 0,
+    "pred_minus_gold_hist": {
+     "-6": 38,
+     "-5": 8,
+     "-4": 19,
+     "-3": 33,
+     "-2": 51,
+     "-1": 86,
+     "0": 172,
+     "1": 233,
+     "2": 218,
+     "3": 137,
+     "4": 78,
+     "5": 62,
+     "6": 312
+    }
+   },
+   "by_windows": {
+    "1 window": {
+     "videos": 1214,
+     "failed_pct": 0.0,
+     "exact_f1": 0.49835297716937926,
+     "gold_chapters_mean": 8.577429983525535,
+     "pred_chapters_mean": 10.009060955518946,
+     "pred_per_gold": 1.1669067511764142
+    },
+    "2 windows": {
+     "videos": 143,
+     "failed_pct": 0.6993006993006978,
+     "exact_f1": 0.22827935875464442,
+     "gold_chapters_mean": 9.034965034965035,
+     "pred_chapters_mean": 21.04225352112676,
+     "pred_per_gold": 2.3216783216783217
+    },
+    "3+ windows": {
+     "videos": 91,
+     "failed_pct": 0.0,
+     "exact_f1": 0.17155127633811004,
+     "gold_chapters_mean": 17.483516483516482,
+     "pred_chapters_mean": 49.48351648351648,
+     "pred_per_gold": 2.8302954116907606
+    }
+   }
+  },
+  {
+   "config": "M2-FT",
+   "videos": 1448,
+   "windows": 1905,
+   "failed_videos": 46,
+   "failed_windows": 47,
+   "window_causes": {
+    "unescaped quote in a title": 16,
+    "start past window end": 16,
+    "starts repeated or out of order": 12,
+    "wrong JSON schema": 1,
+    "incomplete JSON": 1,
+    "invalid JSON syntax": 1
+   },
+   "video_causes": {
+    "unescaped quote in a title": 16,
+    "start past window end": 16,
+    "starts repeated or out of order": 11,
+    "wrong JSON schema": 1,
+    "incomplete JSON": 1,
+    "invalid JSON syntax": 1
+   },
+   "examples": {
+    "starts repeated or out of order": "{\"chapters\":[{\"start\":0,\"title\":\"Introduction\"},{\"start\":15,\"title\":\"Intro with Sandor Katz and Tim Spector\"},{\"start\":46,\"title\":\"A Quick-Fire Round\"},{\"start\":65,\"title\":\"Fermentation History\"},{\"start\":218,\"title\":\"Fe",
+    "unescaped quote in a title": "{\"chapters\":[{\"start\":0,\"title\":\"The \"Problem\" of Overpopulation\"},{\"start\":8,\"title\":\"How Do We Produce Food?\"},{\"start\":22,\"title\":\"When Could Population Reach 100 Billion?\"},{\"start\":29,\"title\":\"Space and Population\"}",
+    "start past window end": "{\"chapters\":[{\"start\":229,\"title\":\"The Problem\"},{\"start\":304,\"title\":\"The Four Plans\"},{\"start\":374,\"title\":\"See You\"}]}",
+    "wrong JSON schema": "{\"chapters\":[{\"start\":0,\"title\":\"Intro\"},{\"start\":2,\"title\":\"Alabama - Lane Cake\"},{\"start\":7,\"title\":\"Alaska - King Crab\"},{\"start\":11,\"title\":\"Arizona - Chimichanga\"},{\"start\":13,\"title\":\"Arkansas - Fried Pickles\"},{\"s",
+    "incomplete JSON": "{\"chapters\":[{\"start\":327,\"title\":\"What's an underrated aspect of machine learning or deep learning that you think people should pay more attention to?\"},{\"start\":337,\"title\":\"Does the use of AutoML change how you think ",
+    "invalid JSON syntax": "{\"chapters\":[{\"start\":1114,\"title\":\"Basic Form HTML\"},{\"start\":1139,\"title\":\"Custom Form Creation\"},{\"start\":1161,\"title\":\"Rendering the Form in Templates\"},{\"start\":1183,\"title\":\"Forms and CSRF\"},{\"start\":1222,\"title\":\""
+   },
+   "chapter_counts": {
+    "ok_videos": 1402,
+    "gold_mean": 9.075606276747504,
+    "pred_mean": 7.696861626248217,
+    "gold_median": 8.0,
+    "pred_median": 6.0,
+    "pred_per_gold": 0.8480823640364665,
+    "under_pct": 53.6376604850214,
+    "exact_count_pct": 18.75891583452211,
+    "over_pct": 27.60342368045649,
+    "within_1_pct": 42.7246790299572,
+    "double_or_more_pct": 4.279600570613409,
+    "half_or_less_pct": 18.61626248216833,
+    "spearman_pred_vs_gold": 0.5317674108272288,
+    "one_sentence_chapter_runs": 0,
+    "single_chapter_for_3plus_gold": 13,
+    "pred_minus_gold_hist": {
+     "-6": 159,
+     "-5": 61,
+     "-4": 89,
+     "-3": 115,
+     "-2": 147,
+     "-1": 181,
+     "0": 263,
+     "1": 155,
+     "2": 98,
+     "3": 44,
+     "4": 18,
+     "5": 20,
+     "6": 52
+    }
+   },
+   "by_windows": {
+    "1 window": {
+     "videos": 1214,
+     "failed_pct": 1.565074135090605,
+     "exact_f1": 0.3868338857743378,
+     "gold_chapters_mean": 8.577429983525535,
+     "pred_chapters_mean": 7.0117154811715485,
+     "pred_per_gold": 0.8214705882352941
+    },
+    "2 windows": {
+     "videos": 143,
+     "failed_pct": 7.692307692307687,
+     "exact_f1": 0.14070466791343697,
+     "gold_chapters_mean": 9.034965034965035,
+     "pred_chapters_mean": 8.727272727272727,
+     "pred_per_gold": 0.976271186440678
+    },
+    "3+ windows": {
+     "videos": 91,
+     "failed_pct": 17.582417582417587,
+     "exact_f1": 0.08471707062273562,
+     "gold_chapters_mean": 17.483516483516482,
+     "pred_chapters_mean": 16.8,
+     "pred_per_gold": 0.9375
+    }
+   }
+  }
+ ],
+ "dev": [
+  {
+   "config": "M1-ZS",
+   "videos": 200,
+   "windows": 270,
+   "failed_videos": 1,
+   "failed_windows": 1,
+   "window_causes": {
+    "incomplete JSON": 1
+   },
+   "video_causes": {
+    "incomplete JSON": 1
+   },
+   "examples": {
+    "incomplete JSON": "{ \"chapters\": [ { \"start\": 723, \"title\": \"Sleep Metrics and Media Context\" }, { \"start\": 760, \"title\": \"Alcohol Timing and Health\" }, { \"start\": 791, \"title\": \"Marijuana and Sleep Architecture\" }, { \"start\": 850, \"title\""
+   },
+   "chapter_counts": {
+    "ok_videos": 199,
+    "gold_mean": 9.457286432160805,
+    "pred_mean": 11.180904522613066,
+    "gold_median": 8,
+    "pred_median": 10,
+    "pred_per_gold": 1.1822529224229543,
+    "under_pct": 26.633165829145728,
+    "exact_count_pct": 14.07035175879397,
+    "over_pct": 59.2964824120603,
+    "within_1_pct": 40.7035175879397,
+    "double_or_more_pct": 12.56281407035176,
+    "half_or_less_pct": 4.0201005025125625,
+    "spearman_pred_vs_gold": 0.530495832139965,
+    "one_sentence_chapter_runs": 0,
+    "single_chapter_for_3plus_gold": 0,
+    "pred_minus_gold_hist": {
+     "-6": 13,
+     "-5": 5,
+     "-4": 3,
+     "-3": 6,
+     "-2": 9,
+     "-1": 17,
+     "0": 28,
+     "1": 36,
+     "2": 23,
+     "3": 12,
+     "4": 9,
+     "5": 8,
+     "6": 30
+    }
+   },
+   "by_windows": {
+    "1 window": {
+     "videos": 163,
+     "failed_pct": 0.0,
+     "exact_f1": 0.46394807719822756,
+     "gold_chapters_mean": 8.865030674846626,
+     "pred_chapters_mean": 9.085889570552148,
+     "pred_per_gold": 1.0249134948096885
+    },
+    "2 windows": {
+     "videos": 22,
+     "failed_pct": 0.0,
+     "exact_f1": 0.2073061060873375,
+     "gold_chapters_mean": 8.681818181818182,
+     "pred_chapters_mean": 16.90909090909091,
+     "pred_per_gold": 1.9476439790575917
+    },
+    "3+ windows": {
+     "videos": 15,
+     "failed_pct": 6.666666666666665,
+     "exact_f1": 0.2605723865775129,
+     "gold_chapters_mean": 18.133333333333333,
+     "pred_chapters_mean": 26.571428571428573,
+     "pred_per_gold": 1.5121951219512195
+    }
+   }
+  },
+  {
+   "config": "M1-FT",
+   "videos": 200,
+   "windows": 270,
+   "failed_videos": 10,
+   "failed_windows": 11,
+   "window_causes": {
+    "Markdown fence around JSON": 5,
+    "starts repeated or out of order": 2,
+    "start past window end": 2,
+    "cut off: still thinking": 1,
+    "wrong JSON schema": 1
+   },
+   "video_causes": {
+    "Markdown fence around JSON": 4,
+    "starts repeated or out of order": 2,
+    "start past window end": 2,
+    "cut off: still thinking": 1,
+    "wrong JSON schema": 1
+   },
+   "examples": {
+    "starts repeated or out of order": "{\"chapters\":[{\"start\":277,\"title\":\"Intro\"},{\"start\":277,\"title\":\"Chapter\"}]}",
+    "Markdown fence around JSON": "```json {\"chapters\":[{\"start\":762,\"title\":\"Intro\"},{\"start\":765,\"title\":\"How Can Anyone Hacking?\"},{\"start\":800,\"title\":\"Talks About Mental Health\"},{\"start\":842,\"title\":\"Concluding Words\"}]} ```",
+    "cut off: still thinking": "The user wants a structured outline with specific titles for the chapter This is a \"Transcript into Chapters\" task  I need to divide the transcript into contiguous topical chapters and give each a concise, specific title",
+    "wrong JSON schema": "{\"chapters\":[{\"start\":0,\"title\":\"Intro\"},{\"start\":5,\"title\":\"David Friedell on Reference, Intentions, and the Ease of Producing Stories About Characters\"},{\"start\":18,\"title\":\"Ley Cray on Fiction-Making as Building Using",
+    "start past window end": "{\"chapters\":[{\"start\":0,\"title\":\"Intro\"},{\"start\":4,\"title\":\"Build Chart Part #1\"},{\"start\":43,\"title\":\"Add Deviation Chart\"},{\"start\":73,\"title\":\"Negative Value Coloring Trick\"},{\"start\":90,\"title\":\"Conditionally Format"
+   },
+   "chapter_counts": {
+    "ok_videos": 190,
+    "gold_mean": 9.23157894736842,
+    "pred_mean": 9.9,
+    "gold_median": 8.0,
+    "pred_median": 9.0,
+    "pred_per_gold": 1.072405929304447,
+    "under_pct": 30.0,
+    "exact_count_pct": 15.263157894736842,
+    "over_pct": 54.73684210526316,
+    "within_1_pct": 42.63157894736842,
+    "double_or_more_pct": 9.473684210526315,
+    "half_or_less_pct": 5.7894736842105265,
+    "spearman_pred_vs_gold": 0.5571908223639098,
+    "one_sentence_chapter_runs": 1,
+    "single_chapter_for_3plus_gold": 0,
+    "pred_minus_gold_hist": {
+     "-6": 12,
+     "-5": 4,
+     "-4": 1,
+     "-3": 16,
+     "-2": 9,
+     "-1": 15,
+     "0": 29,
+     "1": 37,
+     "2": 27,
+     "3": 9,
+     "4": 10,
+     "5": 8,
+     "6": 13
+    }
+   },
+   "by_windows": {
+    "1 window": {
+     "videos": 163,
+     "failed_pct": 2.4539877300613466,
+     "exact_f1": 0.42447114067929925,
+     "gold_chapters_mean": 8.865030674846626,
+     "pred_chapters_mean": 8.817610062893081,
+     "pred_per_gold": 0.9894142554693014
+    },
+    "2 windows": {
+     "videos": 22,
+     "failed_pct": 18.181818181818176,
+     "exact_f1": 0.13758179805023454,
+     "gold_chapters_mean": 8.681818181818182,
+     "pred_chapters_mean": 12,
+     "pred_per_gold": 1.5104895104895104
+    },
+    "3+ windows": {
+     "videos": 15,
+     "failed_pct": 13.33333333333333,
+     "exact_f1": 0.235235020635286,
+     "gold_chapters_mean": 18.133333333333333,
+     "pred_chapters_mean": 20.23076923076923,
+     "pred_per_gold": 1.3556701030927836
+    }
+   }
+  },
+  {
+   "config": "M1-RFTv2",
+   "videos": 200,
+   "windows": 270,
+   "failed_videos": 4,
+   "failed_windows": 5,
+   "window_causes": {
+    "incomplete JSON": 5
+   },
+   "video_causes": {
+    "incomplete JSON": 4
+   },
+   "examples": {
+    "incomplete JSON": "{ \"chapters\":[ {\"start\":0,\"title\":\"Intro to Gravitational Physics\"}, {\"start\":43,\"title\":\"Implementing Two Movers\"}, {\"start\":81,\"title\":\"Adding a Third Mover\"}, {\"start\":124,\"title\":\"Initializing Array Positions\"}, {\"st"
+   },
+   "chapter_counts": {
+    "ok_videos": 196,
+    "gold_mean": 9.443877551020408,
+    "pred_mean": 10.627551020408163,
+    "gold_median": 8.0,
+    "pred_median": 9.0,
+    "pred_per_gold": 1.1253376553214478,
+    "under_pct": 30.612244897959183,
+    "exact_count_pct": 12.244897959183673,
+    "over_pct": 57.142857142857146,
+    "within_1_pct": 45.91836734693877,
+    "double_or_more_pct": 11.73469387755102,
+    "half_or_less_pct": 3.061224489795918,
+    "spearman_pred_vs_gold": 0.5114556555587075,
+    "one_sentence_chapter_runs": 0,
+    "single_chapter_for_3plus_gold": 0,
+    "pred_minus_gold_hist": {
+     "-6": 16,
+     "-5": 2,
+     "-4": 3,
+     "-3": 9,
+     "-2": 8,
+     "-1": 22,
+     "0": 24,
+     "1": 44,
+     "2": 19,
+     "3": 8,
+     "4": 6,
+     "5": 6,
+     "6": 29
+    }
+   },
+   "by_windows": {
+    "1 window": {
+     "videos": 163,
+     "failed_pct": 1.2269938650306789,
+     "exact_f1": 0.49032766947116535,
+     "gold_chapters_mean": 8.865030674846626,
+     "pred_chapters_mean": 8.857142857142858,
+     "pred_per_gold": 1.007773851590106
+    },
+    "2 windows": {
+     "videos": 22,
+     "failed_pct": 4.545454545454541,
+     "exact_f1": 0.20797251538624414,
+     "gold_chapters_mean": 8.681818181818182,
+     "pred_chapters_mean": 14.333333333333334,
+     "pred_per_gold": 1.5925925925925926
+    },
+    "3+ windows": {
+     "videos": 15,
+     "failed_pct": 6.666666666666665,
+     "exact_f1": 0.23269071162718508,
+     "gold_chapters_mean": 18.133333333333333,
+     "pred_chapters_mean": 25.428571428571427,
+     "pred_per_gold": 1.4412955465587045
+    }
+   }
+  },
+  {
+   "config": "M2-ZS",
+   "videos": 200,
+   "windows": 270,
+   "failed_videos": 0,
+   "failed_windows": 0,
+   "window_causes": {},
+   "video_causes": {},
+   "examples": {},
+   "chapter_counts": {
+    "ok_videos": 200,
+    "gold_mean": 9.54,
+    "pred_mean": 13.97,
+    "gold_median": 8.0,
+    "pred_median": 11.0,
+    "pred_per_gold": 1.4643605870020964,
+    "under_pct": 12.5,
+    "exact_count_pct": 13.0,
+    "over_pct": 74.5,
+    "within_1_pct": 34.5,
+    "double_or_more_pct": 20.0,
+    "half_or_less_pct": 1.0,
+    "spearman_pred_vs_gold": 0.5102579989278144,
+    "one_sentence_chapter_runs": 0,
+    "single_chapter_for_3plus_gold": 0,
+    "pred_minus_gold_hist": {
+     "-6": 6,
+     "-4": 4,
+     "-3": 4,
+     "-2": 4,
+     "-1": 7,
+     "0": 26,
+     "1": 36,
+     "2": 29,
+     "3": 23,
+     "4": 9,
+     "5": 7,
+     "6": 45
+    }
+   },
+   "by_windows": {
+    "1 window": {
+     "videos": 163,
+     "failed_pct": 0.0,
+     "exact_f1": 0.5133596173346596,
+     "gold_chapters_mean": 8.865030674846626,
+     "pred_chapters_mean": 10.28834355828221,
+     "pred_per_gold": 1.160553633217993
+    },
+    "2 windows": {
+     "videos": 22,
+     "failed_pct": 0.0,
+     "exact_f1": 0.18804046197241645,
+     "gold_chapters_mean": 8.681818181818182,
+     "pred_chapters_mean": 20.5,
+     "pred_per_gold": 2.3612565445026177
+    },
+    "3+ windows": {
+     "videos": 15,
+     "failed_pct": 0.0,
+     "exact_f1": 0.27140098858317036,
+     "gold_chapters_mean": 18.133333333333333,
+     "pred_chapters_mean": 44.4,
+     "pred_per_gold": 2.448529411764706
+    }
+   }
+  },
+  {
+   "config": "M2-FT",
+   "videos": 200,
+   "windows": 270,
+   "failed_videos": 8,
+   "failed_windows": 8,
+   "window_causes": {
+    "starts repeated or out of order": 3,
+    "unescaped quote in a title": 3,
+    "invalid JSON syntax": 1,
+    "incomplete JSON": 1
+   },
+   "video_causes": {
+    "starts repeated or out of order": 3,
+    "unescaped quote in a title": 3,
+    "invalid JSON syntax": 1,
+    "incomplete JSON": 1
+   },
+   "examples": {
+    "invalid JSON syntax": "{\"chapters\":[{\"start\":519,\"title\":\"Intro\"},{\"start\":530,\"title\":\"What's Justin Doing Nowadays?\"},{\"start\":589,\"title\":\"Why OSINT?\"},{\"start\":610,\"title\":\"Justin's Favourite OSINT Stories\"},{\"start\":631,\"title\":\"The Power",
+    "starts repeated or out of order": "{\"chapters\":[{\"start\":0,\"title\":\"Introduction\"},{\"start\":4,\"title\":\"Unboxing\"},{\"start\":10,\"title\":\"Assembly\"},{\"start\":21,\"title\":\"Design\"},{\"start\":31,\"title\":\"Teardown\"},{\"start\":43,\"title\":\"Deep dive into the compone",
+    "unescaped quote in a title": "{\"chapters\":[{\"start\":0,\"title\":\"Intro\"},{\"start\":13,\"title\":\"Keep in Mind that Online Classes Are \"Real\" Online Classes\"},{\"start\":30,\"title\":\"Get Serious about Your Calendar and To-Do List\"},{\"start\":46,\"title\":\"Get Di",
+    "incomplete JSON": "{\"chapters\":[{\"start\":282,\"title\":\"Backtrack\"},{\"start\":284,\"title\":\"Loud Siren\"},{\"start\":285,\"title\":\"Water Resistance\"},{\"start\":288,\"title\":\"Depth Gauge\"},{\"start\":290,\"title\":\"Dive App\"},{\"start\":313,\"title\":\"Apple "
+   },
+   "chapter_counts": {
+    "ok_videos": 192,
+    "gold_mean": 9.135416666666666,
+    "pred_mean": 7.8125,
+    "gold_median": 8.0,
+    "pred_median": 7.0,
+    "pred_per_gold": 0.855188141391106,
+    "under_pct": 53.645833333333336,
+    "exact_count_pct": 14.0625,
+    "over_pct": 32.291666666666664,
+    "within_1_pct": 39.583333333333336,
+    "double_or_more_pct": 6.25,
+    "half_or_less_pct": 21.354166666666668,
+    "spearman_pred_vs_gold": 0.4625126446550881,
+    "one_sentence_chapter_runs": 0,
+    "single_chapter_for_3plus_gold": 6,
+    "pred_minus_gold_hist": {
+     "-6": 28,
+     "-5": 10,
+     "-4": 12,
+     "-3": 11,
+     "-2": 17,
+     "-1": 25,
+     "0": 27,
+     "1": 24,
+     "2": 18,
+     "3": 5,
+     "4": 3,
+     "5": 2,
+     "6": 10
+    }
+   },
+   "by_windows": {
+    "1 window": {
+     "videos": 163,
+     "failed_pct": 1.8404907975460127,
+     "exact_f1": 0.394274583455942,
+     "gold_chapters_mean": 8.865030674846626,
+     "pred_chapters_mean": 7.15,
+     "pred_per_gold": 0.8084805653710248
+    },
+    "2 windows": {
+     "videos": 22,
+     "failed_pct": 0.0,
+     "exact_f1": 0.14115554921548631,
+     "gold_chapters_mean": 8.681818181818182,
+     "pred_chapters_mean": 10.272727272727273,
+     "pred_per_gold": 1.1832460732984293
+    },
+    "3+ windows": {
+     "videos": 15,
+     "failed_pct": 33.333333333333336,
+     "exact_f1": 0.11529807424544267,
+     "gold_chapters_mean": 18.133333333333333,
+     "pred_chapters_mean": 13,
+     "pred_per_gold": 0.8783783783783784
+    }
+   }
+  },
+  {
+   "config": "M2-RFTv2",
+   "videos": 200,
+   "windows": 270,
+   "failed_videos": 0,
+   "failed_windows": 0,
+   "window_causes": {},
+   "video_causes": {},
+   "examples": {},
+   "chapter_counts": {
+    "ok_videos": 200,
+    "gold_mean": 9.54,
+    "pred_mean": 13.98,
+    "gold_median": 8.0,
+    "pred_median": 11.0,
+    "pred_per_gold": 1.4654088050314464,
+    "under_pct": 15.5,
+    "exact_count_pct": 12.0,
+    "over_pct": 72.5,
+    "within_1_pct": 32.0,
+    "double_or_more_pct": 22.0,
+    "half_or_less_pct": 1.5,
+    "spearman_pred_vs_gold": 0.4598888390992765,
+    "one_sentence_chapter_runs": 1,
+    "single_chapter_for_3plus_gold": 0,
+    "pred_minus_gold_hist": {
+     "-6": 5,
+     "-5": 6,
+     "-4": 3,
+     "-3": 4,
+     "-2": 5,
+     "-1": 8,
+     "0": 24,
+     "1": 32,
+     "2": 26,
+     "3": 24,
+     "4": 10,
+     "5": 8,
+     "6": 45
+    }
+   },
+   "by_windows": {
+    "1 window": {
+     "videos": 163,
+     "failed_pct": 0.0,
+     "exact_f1": 0.5191586309630982,
+     "gold_chapters_mean": 8.865030674846626,
+     "pred_chapters_mean": 10.257668711656441,
+     "pred_per_gold": 1.1570934256055363
+    },
+    "2 windows": {
+     "videos": 22,
+     "failed_pct": 0.0,
+     "exact_f1": 0.201751534328239,
+     "gold_chapters_mean": 8.681818181818182,
+     "pred_chapters_mean": 21.045454545454547,
+     "pred_per_gold": 2.424083769633508
+    },
+    "3+ windows": {
+     "videos": 15,
+     "failed_pct": 0.0,
+     "exact_f1": 0.25173795949159916,
+     "gold_chapters_mean": 18.133333333333333,
+     "pred_chapters_mean": 44.06666666666667,
+     "pred_per_gold": 2.4301470588235294
+    }
+   }
+  }
+ ],
+ "summary": [
+  "* **E1 zero-shot** fails on 1,435 of 1,448 videos. In 1,175 of them the JSON is valid but wrapped in a Markdown fence, a habit of the instruction-tuned model. 129 hit the 4,096-token cap, 127 of them by listing a new \"chapter\" almost every sentence. 83 have broken JSON, and 46 add other text.",
+  "* **E2 zero-shot** fails on 477 videos, mostly by talking instead of answering: 261 cases of extra text, including 113 with no JSON at all (summaries, or chat replies such as \"You are correct. I apologize…\"). There are also 93 fence or period wrappers and 51 cut-offs, 41 of them echoing the transcript.",
+  "* **LoRA fixes the format for the encoder-decoders.** Failed videos drop to 27 (E1) and 4 (E2). E1's remaining failures are mostly titles that quote something without escaping the quotes (13 of 27, e.g. `\"Victor Frankl's \"Man Search for Meaning\"\"`).",
+  "* **M1/M2 zero-shot almost never fail** (4 and 1 videos). Their native thinking ends in clean JSON.",
+  "* **Answer-only LoRA makes M1/M2 sloppier.**",
+  "  * M1 LoRA fails on 116 videos. 58 add Markdown fences that zero-shot never produced, 23 have invalid starts, and 12 never finish thinking.",
+  "  * M2 LoRA fails on 46, mainly from invalid starts (27) and broken JSON (18, mostly unescaped quotes in titles).",
+  "* **Chapter count.**",
+  "  * Zero-shot M1/M2 over-segment: pred/gold 1.25 and 1.48. Most of that comes from long videos (section 4).",
+  "  * Their LoRA versions predict fewer chapters (1.08 and 0.85). M2 LoRA under-segments 54% of videos.",
+  "  * The encoder-decoder LoRAs are closest to gold: 0.97 and 0.97, with 53% of E2 videos within ±1 chapter, and the highest rank correlation with gold counts.",
+  "  * E2 zero-shot's counts barely track gold (ρ 0.16). It gives one chapter per sentence in 284 videos and a single chapter in 177.",
+  "* **Long videos are the main remaining weakness.** Every configuration loses F1 sharply from 1 window to 3+ windows (section 4), and M1/M2 zero-shot nearly double the chapter count there."
+ ]
+}

@@ -749,11 +749,53 @@ test_timing = timing[timing.stage.str.startswith("Test")].assign(minutes=lambda 
 display(test_timing[["model", "arm", "device", "engine", "minutes", "seconds_per_video", "output_tokens", "failed_videos"]].set_index(["model", "arm"]))
 """),
         md("""
+## Failure analysis and chapter counts
+
+From `reports/failure-analysis.json` (`scripts/failure_analysis.py`, which needs the raw outputs in `artifacts/`). Every failed window gets exactly one cause; a failed video is attributed to its first failed window. Chapter counts use parsed videos only on both sides.
+"""),
+        code("""
+FA = load_json(ROOT / "reports/failure-analysis.json")
+groups = list(FA["groups"].items())
+causes = pd.DataFrame({t["config"]: {(g, c): t["video_causes"].get(c, 0) for g, cs in groups for c in cs} for t in FA["test"]})
+causes = causes[(causes > 0).any(axis=1)]
+causes.loc[("Total", "failed videos"), :] = [t["failed_videos"] for t in FA["test"]]
+display(causes.astype(int).replace(0, ""))
+"""),
+        code("""
+fig, ax = plt.subplots(figsize=(8, 3.6))
+colors = ["#8a97a8", "#c98a00", "#b3261e", "#7b4fc9", "#2f5fd0", "#18794e"]
+configs = [t["config"] for t in FA["test"]][::-1]
+left = [0] * len(configs)
+for (g, cs), col in zip(groups, colors):
+    vals = [sum(t["video_causes"].get(c, 0) for c in cs) for t in FA["test"]][::-1]
+    ax.barh(configs, vals, left=left, color=col, label=g)
+    left = [a + b for a, b in zip(left, vals)]
+for i, v in enumerate(left):
+    ax.text(v + 10, i, f"{v:,}", va="center", fontsize=9)
+ax.set_xlabel("failed test videos (of 1,448)"); ax.legend(frameon=False, fontsize=8, loc="lower right"); plt.tight_layout()
+"""),
+        code("""
+counts = pd.DataFrame([{"config": t["config"], **{k: t["chapter_counts"][k] for k in
+    ["ok_videos", "gold_mean", "pred_mean", "pred_per_gold", "under_pct", "exact_count_pct", "over_pct", "within_1_pct",
+     "spearman_pred_vs_gold", "one_sentence_chapter_runs", "single_chapter_for_3plus_gold"]}} for t in FA["test"]]).set_index("config")
+display(counts.round(2))
+length = pd.DataFrame({t["config"]: {(b, m): t["by_windows"][b][m] for b in ["1 window", "2 windows", "3+ windows"]
+                                     for m in ["exact_f1", "failed_pct", "pred_per_gold"]} for t in FA["test"]}).T
+display(length.round(3))
+"""),
+        code("""
+for t in FA["test"]:
+    if t["failed_videos"] >= 10:
+        cause, n = next(iter(t["window_causes"].items()))
+        print(f"{t['config']}: most common window failure = {cause} ({n} windows)\\n   {t['examples'].get(cause, '')[:160]!r}")
+"""),
+        md("""
 ## Conclusions
 
 * **Best system: E2 (T5Gemma 2B-2B) + LoRA**, exact F1 0.500 on test. The smaller encoder-decoder beats the 9B-2B one and every decoder-only setup.
 * **LoRA effect depends on architecture.** It is essential for the encoder-decoders, whose zero-shot output mostly fails the format. Answer-only LoRA *hurts* the reasoning decoder-only models (M1 −0.038, M2 −0.108) because it suppresses their native thinking.
 * **RFT on the model's own reasoning** repairs that; with 1,306 windows, M1 reaches 0.440 on dev, above zero-shot (dev only).
+* **Failures and counts:** zero-shot encoder-decoders fail on format (fences, chat text, runaway lists); answer-only LoRA adds fences and invalid starts to M1/M2. Zero-shot M1/M2 over-segment (1.25×, 1.48×), mostly on multi-window videos.
 * **Limitations:** pilot-scale adapters (1,000 videos, one pass, one seed); M1's adapter covers only 8 of 32 layers; multi-window videos remain much harder.
 """),
     ])
